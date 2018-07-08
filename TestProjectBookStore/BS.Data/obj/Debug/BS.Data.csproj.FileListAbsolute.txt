@@ -1,0 +1,8 @@
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Data\bin\Debug\BS.Data.dll
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Data\bin\Debug\BS.Data.pdb
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Data\bin\Debug\Dapper.dll
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Data\bin\Debug\Dapper.xml
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Data\obj\Debug\BS.Data.csprojResolveAssemblyReference.cache
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Data\obj\Debug\BS.Data.csproj.CoreCompileInputs.cache
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Data\obj\Debug\BS.Data.dll
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Data\obj\Debug\BS.Data.pdb

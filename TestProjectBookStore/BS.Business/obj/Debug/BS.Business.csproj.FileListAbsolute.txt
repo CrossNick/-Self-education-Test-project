@@ -1,0 +1,13 @@
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\BS.Business.dll
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\BS.Business.pdb
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\AutoMapper.dll
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\BS.Data.dll
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\System.ValueTuple.dll
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\BS.Data.pdb
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\AutoMapper.pdb
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\AutoMapper.xml
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\System.ValueTuple.xml
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Business\obj\Debug\BS.Business.csprojResolveAssemblyReference.cache
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Business\obj\Debug\BS.Business.csproj.CoreCompileInputs.cache
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Business\obj\Debug\BS.Business.dll
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Business\obj\Debug\BS.Business.pdb
