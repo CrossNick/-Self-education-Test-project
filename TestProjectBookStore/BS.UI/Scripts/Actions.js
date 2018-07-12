@@ -12,9 +12,9 @@
                     "<th scope=\"col\">ReleaseDate</th><th scope=\"col\">Rating</th><th scope=\"col\">PageCount</th></tr > ")
                 for (var x = 0; x < data.length; x++) {
                     var Authors = "";
-                    data[x].Authors.forEach(function (item, i, data[x].Author) {
+                    data[x].Authors.forEach(function (item) {
                         Authors += item;
-                        Author += ", ";
+                        Authors += ", ";
                     });
 
                     $('#tablebody').append("<tr><td scope=\"row\">" + data[x].BookId + "</td><td>" + data[x].Title + "</td><td>" + Authors + "</td><td>" + data[x].ReleaseDate + "</td><td>" + data[x].Rating + "</td><td>" + data[x].PageCount + "</td></tr>")
