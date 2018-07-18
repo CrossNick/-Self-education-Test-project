@@ -6,3 +6,12 @@ D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Dat
 D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Data\obj\Debug\BS.Data.csproj.CoreCompileInputs.cache
 D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Data\obj\Debug\BS.Data.dll
 D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Data\obj\Debug\BS.Data.pdb
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Data\bin\Debug\BS.Data.dll
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Data\bin\Debug\BS.Data.pdb
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Data\bin\Debug\Dapper.dll
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Data\bin\Debug\Dapper.xml
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Data\obj\Debug\BS.Data.csprojAssemblyReference.cache
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Data\obj\Debug\BS.Data.csproj.CoreCompileInputs.cache
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Data\obj\Debug\BS.Data.csproj.CopyComplete
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Data\obj\Debug\BS.Data.dll
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Data\obj\Debug\BS.Data.pdb

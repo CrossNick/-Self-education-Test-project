@@ -12,7 +12,7 @@ namespace BS.Data.EntityModels
         public string Title { get; set; }
         public DateTime ReleaseDate { get; set; }
         public IEnumerable<AuthorEM> Authors { get; set; }
-        public int Rating { get; set; }
+        public float Rating { get; set; }
         public int PageCount { get; set; }
     }
 }

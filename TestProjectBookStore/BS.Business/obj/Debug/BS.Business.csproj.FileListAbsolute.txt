@@ -11,3 +11,17 @@ D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Bus
 D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Business\obj\Debug\BS.Business.csproj.CoreCompileInputs.cache
 D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Business\obj\Debug\BS.Business.dll
 D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.Business\obj\Debug\BS.Business.pdb
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\BS.Business.dll
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\BS.Business.pdb
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\AutoMapper.dll
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\BS.Data.dll
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\System.ValueTuple.dll
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\BS.Data.pdb
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\AutoMapper.pdb
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\AutoMapper.xml
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\System.ValueTuple.xml
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\obj\Debug\BS.Business.csprojAssemblyReference.cache
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\obj\Debug\BS.Business.csproj.CoreCompileInputs.cache
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\obj\Debug\BS.Business.csproj.CopyComplete
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\obj\Debug\BS.Business.dll
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\obj\Debug\BS.Business.pdb
