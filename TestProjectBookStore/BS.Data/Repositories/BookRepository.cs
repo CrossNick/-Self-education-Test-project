@@ -18,6 +18,23 @@ namespace BS.Data.Repositories
         private const string SP_GET_BOOK = "USPGetBook";
         private const string SP_UPDATE_BOOK = "USPUpdateBook";
 
+        public static DataTable AsDataTableParam<T>(this IEnumerable<T> data)
+        {
+            var tableAsParam = new DataTable();
+
+            tableAsParam.Columns.Add("ItemId");
+
+            if (data != null)
+            {
+                foreach (var item in data)
+                {
+                    tableAsParam.Rows.Add(item);
+                }
+            }
+
+            return tableAsParam;
+        }
+
         public BookEM Create(BookEM book)
         {
             using (IDbConnection db = new SqlConnection("DefaultConnection"))
