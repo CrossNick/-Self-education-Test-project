@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BS.Data.EntityModels;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -9,11 +10,10 @@ namespace BS.Data
 {
     static class ParametersExtensions
     {
-        public static DataTable AsDataTableParam<T>(this IEnumerable<T> data)
+        public static DataTable AuthorsAsDataTableParam(this IEnumerable<AuthorEM> data)
         {
             var tableAsParam = new DataTable();
-
-            tableAsParam.Columns.Add("ItemId");
+            tableAsParam.Columns.Add("AuthorId");
 
             if (data != null)
             {

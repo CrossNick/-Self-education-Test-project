@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BS.Data.EntityModels
 {
-    class BookEM
+    public class BookEM
     {
         public int BookId { get; set; }
         public string Title { get; set; }

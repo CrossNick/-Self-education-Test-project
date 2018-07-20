@@ -109,3 +109,12 @@ C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjec
 C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.UI\obj\Debug\BS.UI.csproj.CopyComplete
 C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.UI\obj\Debug\BS.UI.dll
 C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.UI\obj\Debug\BS.UI.pdb
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\AutoMapper.dll
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\BS.Data.dll
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\System.ValueTuple.dll
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\Dapper.dll
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\AutoMapper.pdb
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\AutoMapper.xml
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\BS.Data.pdb
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\System.ValueTuple.xml
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\Dapper.xml

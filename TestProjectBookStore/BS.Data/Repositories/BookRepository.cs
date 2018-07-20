@@ -18,35 +18,18 @@ namespace BS.Data.Repositories
         private const string SP_GET_BOOK = "USPGetBook";
         private const string SP_UPDATE_BOOK = "USPUpdateBook";
 
-        public static DataTable AsDataTableParam<T>(this IEnumerable<T> data)
-        {
-            var tableAsParam = new DataTable();
-
-            tableAsParam.Columns.Add("ItemId");
-
-            if (data != null)
-            {
-                foreach (var item in data)
-                {
-                    tableAsParam.Rows.Add(item);
-                }
-            }
-
-            return tableAsParam;
-        }
-
+      
         public BookEM Create(BookEM book)
         {
             using (IDbConnection db = new SqlConnection("DefaultConnection"))
             {
-                book.BookId = db.Query<int>(SP_INSERT_BOOK, book, null,true,null,CommandType.StoredProcedure).FirstOrDefault();
-                foreach (var author in book.Authors)
-                {
-                    DynamicParameters sqlParams = new DynamicParameters();
-                    sqlParams.Add("BookId", book.BookId, DbType.Int32, ParameterDirection.Input);
-                    sqlParams.Add("AuthorId", author.AuthorId, DbType.Int32, ParameterDirection.Input);
-                    db.Query(SP_INSERT_BOOK_AUTHOR, sqlParams, null, true, null, CommandType.StoredProcedure);
-                }
+                DynamicParameters sqlParams = new DynamicParameters();
+                sqlParams.Add("@Title", book.Title, DbType.String);
+                sqlParams.Add("@ReleaseDate", book.ReleaseDate, DbType.Date);
+                sqlParams.Add("@Rating", book.Rating, DbType.Double);
+                sqlParams.Add("@PageCount", book.PageCount, DbType.Int32);
+                sqlParams.Add("@AuthorIds", book.Authors.AuthorsAsDataTableParam().AsTableValuedParameter());
+                book.BookId = db.Query<int>(SP_INSERT_BOOK, book, null, true, null, CommandType.StoredProcedure).FirstOrDefault();
             }
             return book;
         }

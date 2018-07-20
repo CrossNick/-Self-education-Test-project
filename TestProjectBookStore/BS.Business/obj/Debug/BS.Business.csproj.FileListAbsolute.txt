@@ -25,3 +25,5 @@ C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjec
 C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\obj\Debug\BS.Business.csproj.CopyComplete
 C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\obj\Debug\BS.Business.dll
 C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\obj\Debug\BS.Business.pdb
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\Dapper.dll
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.Business\bin\Debug\Dapper.xml
