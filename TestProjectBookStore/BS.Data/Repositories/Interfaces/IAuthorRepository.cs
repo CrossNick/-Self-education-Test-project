@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BS.Data.Repositories
 {
-    interface IAuthorRepository : IRepository<AuthorEM>
+    public interface IAuthorRepository : IRepository<AuthorEM>
 
     {
     }

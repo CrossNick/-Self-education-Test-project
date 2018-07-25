@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BS.Business
 {
-    public class AutoMapperInitialize
+    public class AutoMapperInitializer
     {
         public static  void InitMappings()
         {

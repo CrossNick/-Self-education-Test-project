@@ -10,7 +10,7 @@ using BS.Data.EntityModels;
 
 namespace BS.Data.Repositories
 {
-    class AuthorRepository: IAuthorRepository
+    public class AuthorRepository: IAuthorRepository
     {
         private const string SP_INSERT_AUTHOR = "USPAuthorInsert";
         private const string SP_DELETE_AUTHOR = "USPAuthorDelete";

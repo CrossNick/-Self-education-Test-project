@@ -1,5 +1,6 @@
 using System;
-
+using BS.Business;
+using BS.Business.DomainModels;
 using Unity;
 
 namespace BS.UI
@@ -39,6 +40,9 @@ namespace BS.UI
             // NOTE: To load from web.config uncomment the line below.
             // Make sure to add a Unity.Configuration to the using statements.
             // container.LoadConfiguration();
+            UnityInitializer.InitUnity(container);
+            container.RegisterType<IBookDM, BookDM>();
+            container.RegisterType<IAuthorDM, AuthorDM>();
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();

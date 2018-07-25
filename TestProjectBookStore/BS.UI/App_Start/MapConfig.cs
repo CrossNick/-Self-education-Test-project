@@ -10,7 +10,7 @@ namespace BS.UI.App_Start
     {
         public static void Init()
         {
-            AutoMapperInitialize.InitMappings();
+            AutoMapperInitializer.InitMappings();
         }
     }
 }

@@ -10,7 +10,7 @@ using BS.Data.EntityModels;
 
 namespace BS.Data.Repositories
 {
-    class BookRepository : IBookRepository
+    public class BookRepository : IBookRepository
     {
         private const string SP_INSERT_BOOK = "USPBookInsert";
         private const string SP_INSERT_BOOK_AUTHOR = "USPBookAuthorInsert";

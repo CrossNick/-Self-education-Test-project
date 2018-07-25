@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BS.Business.DomainModels
 {
-    interface IAuthorDM
+    public interface IAuthorDM
     {
     }
 }
