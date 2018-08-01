@@ -1,0 +1,10 @@
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.DataBase\bin\Debug\BS.DataBase.dacpac
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.DataBase\obj\Debug\BS.DataBase.sqlprojAssemblyReference.cache
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.DataBase\obj\Debug\BS.DataBase.dll
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.DataBase\obj\Debug\BS.DataBase.pdb
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.DataBase\bin\Debug\BS.DataBase.dll
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.DataBase\bin\Debug\BS.DataBase.pdb
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.DataBase\obj\Debug\Model.xml
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.DataBase\obj\Debug\refactor.xml
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.DataBase\obj\Debug\postdeploy.sql
+C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.DataBase\obj\Debug\predeploy.sql
