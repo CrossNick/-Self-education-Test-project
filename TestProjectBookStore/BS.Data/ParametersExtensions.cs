@@ -10,7 +10,7 @@ namespace BS.Data
 {
     static class ParametersExtensions
     {
-        public static DataTable AuthorsAsDataTableParam(this IEnumerable<AuthorEM> data)
+        public static DataTable AuthorsAsDataTableParam(this IEnumerable<int> data)
         {
             var tableAsParam = new DataTable();
             tableAsParam.Columns.Add("AuthorId");

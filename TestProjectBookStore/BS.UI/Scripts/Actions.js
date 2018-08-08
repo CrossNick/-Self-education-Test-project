@@ -13,7 +13,7 @@
                 for (var x = 0; x < data.length; x++) {
                     var Authors = "";
                     data[x].Authors.forEach(function (item) {
-                        Authors += item;
+                        Authors += item.FirstName + ' ' + item.LastName;
                         Authors += ", ";
                     });
 

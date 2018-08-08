@@ -11,16 +11,22 @@ namespace BS.Business.DomainModels
 {
     public class BookDM : IBookDM
     {
-        public IBookRepository repo;
+        public IBookRepository bookRepo;
+        public IAuthorRepository authorRepo;
 
-        public BookDM(IBookRepository repo)
+        public BookDM(IBookRepository bookRepo, IAuthorRepository authorRepo)
         {
-            this.repo = repo;
+            this.bookRepo = bookRepo;
+            this.authorRepo = authorRepo;
         }
 
         public IEnumerable<BookVM> GetBooks()
         {
-            var result = Mapper.Map<IEnumerable<BookVM>>(repo.Get());
+            var result = Mapper.Map<IEnumerable<BookVM>>(bookRepo.Get());
+            foreach(var book in result)
+            {
+                book.Authors = Mapper.Map<IEnumerable<AuthorVM>>(authorRepo.GetAuthors(book.BookId));
+            }
             return result;
         }
     }

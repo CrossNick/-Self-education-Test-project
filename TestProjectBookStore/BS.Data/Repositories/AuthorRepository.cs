@@ -37,10 +37,15 @@ namespace BS.Data.Repositories
         public IEnumerable<AuthorEM> Get()
         {
             IEnumerable<AuthorEM> result;
-            using (IDbConnection db = new SqlConnection("DefaultConnection"))
-            {
-                result = db.Query<AuthorEM>(SP_GET_AUTHOR, null, null, true, null, CommandType.StoredProcedure);
-            }
+            result = new List<AuthorEM>(){
+                new AuthorEM(){AuthorId=1, FirstName="John", LastName="Smith", BooksCount=2},
+                new AuthorEM(){AuthorId=2, FirstName="James", LastName="Mitch", BooksCount=3},
+                new AuthorEM(){AuthorId=2, FirstName="Joe", LastName="Truth", BooksCount=2}
+            };
+            //using (IDbConnection db = new SqlConnection("DefaultConnection"))
+            //{
+            //    result = db.Query<AuthorEM>(SP_GET_AUTHOR, null, null, true, null, CommandType.StoredProcedure);
+            //}
             return result;
         }
         public AuthorEM Get(int AuthorId)
@@ -61,6 +66,30 @@ namespace BS.Data.Repositories
             }
         }
 
-      
+        public IEnumerable<AuthorEM> GetAuthors(int bookId)
+        {
+            IEnumerable<AuthorEM> result;
+           
+            if (bookId == 1)
+                result = new List<AuthorEM>(){
+                new AuthorEM(){AuthorId=1, FirstName="John", LastName="Smith", BooksCount=2},
+                new AuthorEM(){AuthorId=2, FirstName="James", LastName="Mitch", BooksCount=3}
+                };
+            else if(bookId == 2)
+                result = new List<AuthorEM>(){
+                new AuthorEM(){AuthorId=2, FirstName="James", LastName="Mitch", BooksCount=3},
+                new AuthorEM(){AuthorId=2, FirstName="Joe", LastName="Truth", BooksCount=2}
+                };
+            else
+                result = new List<AuthorEM>(){
+                new AuthorEM(){AuthorId=1, FirstName="John", LastName="Smith", BooksCount=2},
+                new AuthorEM(){AuthorId=2, FirstName="James", LastName="Mitch", BooksCount=3},
+                new AuthorEM(){AuthorId=2, FirstName="Joe", LastName="Truth", BooksCount=2}
+                };
+
+            return result;
+
+            throw new NotImplementedException();
+        }
     }
 }

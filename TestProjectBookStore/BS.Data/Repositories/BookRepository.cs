@@ -28,7 +28,7 @@ namespace BS.Data.Repositories
                 sqlParams.Add("@ReleaseDate", book.ReleaseDate, DbType.Date);
                 sqlParams.Add("@Rating", book.Rating, DbType.Double);
                 sqlParams.Add("@PageCount", book.PageCount, DbType.Int32);
-                sqlParams.Add("@AuthorIds", book.Authors.AuthorsAsDataTableParam().AsTableValuedParameter());
+                sqlParams.Add("@AuthorIds", book.AuthorsId.AuthorsAsDataTableParam().AsTableValuedParameter());
                 book.BookId = db.Query<int>(SP_INSERT_BOOK, book, null, true, null, CommandType.StoredProcedure).FirstOrDefault();
             }
             return book;
@@ -45,10 +45,15 @@ namespace BS.Data.Repositories
         public IEnumerable<BookEM> Get()
         {
             IEnumerable<BookEM> result;
-            using (IDbConnection db = new SqlConnection("DefaultConnection"))
-            {
-                result = db.Query<BookEM>(SP_GET_BOOK, null,null,true,null,CommandType.StoredProcedure);
-            }
+            result = new List<BookEM>(){
+                new BookEM(){BookId=1, Title="Book 1", ReleaseDate=new DateTime(2010,1,1), Rating=10, PageCount=300},
+                new BookEM(){BookId=2, Title="Book 2", ReleaseDate=new DateTime(2010,2,2), Rating=5, PageCount=500},
+                new BookEM(){BookId=3, Title="Book 3", ReleaseDate=new DateTime(2010,3,3), Rating=8, PageCount=600}
+            };
+            //using (IDbConnection db = new SqlConnection("DefaultConnection"))
+            //{
+            //    result = db.Query<BookEM>(SP_GET_BOOK, null,null,true,null,CommandType.StoredProcedure);
+            //}
             return result;
         }
         public BookEM Get(int BookId)

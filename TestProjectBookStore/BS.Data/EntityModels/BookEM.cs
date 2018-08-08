@@ -11,7 +11,7 @@ namespace BS.Data.EntityModels
         public int BookId { get; set; }
         public string Title { get; set; }
         public DateTime ReleaseDate { get; set; }
-        public IEnumerable<AuthorEM> Authors { get; set; }
+        public IEnumerable<int> AuthorsId { get; set; }
         public float Rating { get; set; }
         public int PageCount { get; set; }
     }

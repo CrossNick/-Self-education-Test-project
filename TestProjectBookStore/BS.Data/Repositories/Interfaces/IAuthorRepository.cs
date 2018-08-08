@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BS.Data.Repositories
 {
     public interface IAuthorRepository : IRepository<AuthorEM>
-
     {
+        IEnumerable<AuthorEM> GetAuthors(int bookId);
     }
 }
