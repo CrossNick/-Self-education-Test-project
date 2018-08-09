@@ -2,8 +2,16 @@
     ViewBag.Title = "Home Page";
 }
 
-<table class="table">
+<table class="table"> 
     <thead id="tablehead">
     </thead>
-    <tbody id="tablebody"></tbody>
+    <tbody id="tablebody" data-bind="foreach: books">
+        <tr>
+            <td data-bind="text: BookId"></td>
+            <td data-bind="text: Title"></td>
+            <td data-bind="text: ReleaseDate"></td>
+            <td data-bind="text: Rating"></td>
+            <td data-bind="text: PageCount"></td>
+        </tr>
+    </tbody>
 </table>

@@ -18,7 +18,13 @@ namespace BS.Data.Repositories
         private const string SP_GET_BOOK = "USPGetBook";
         private const string SP_UPDATE_BOOK = "USPUpdateBook";
 
-      
+        private List<BookEM> books = new List<BookEM>(){
+                new BookEM(){BookId=1, Title="Book 1", ReleaseDate=new DateTime(2010,1,1), Rating=10, PageCount=300},
+                new BookEM(){BookId=2, Title="Book 2", ReleaseDate=new DateTime(2010,2,2), Rating=5, PageCount=500},
+                new BookEM(){BookId=3, Title="Book 3", ReleaseDate=new DateTime(2010,3,3), Rating=8, PageCount=600}
+            };
+
+
         public BookEM Create(BookEM book)
         {
             using (IDbConnection db = new SqlConnection("DefaultConnection"))
@@ -44,17 +50,12 @@ namespace BS.Data.Repositories
 
         public IEnumerable<BookEM> Get()
         {
-            IEnumerable<BookEM> result;
-            result = new List<BookEM>(){
-                new BookEM(){BookId=1, Title="Book 1", ReleaseDate=new DateTime(2010,1,1), Rating=10, PageCount=300},
-                new BookEM(){BookId=2, Title="Book 2", ReleaseDate=new DateTime(2010,2,2), Rating=5, PageCount=500},
-                new BookEM(){BookId=3, Title="Book 3", ReleaseDate=new DateTime(2010,3,3), Rating=8, PageCount=600}
-            };
+            //IEnumerable<BookEM> result;
             //using (IDbConnection db = new SqlConnection("DefaultConnection"))
             //{
             //    result = db.Query<BookEM>(SP_GET_BOOK, null,null,true,null,CommandType.StoredProcedure);
             //}
-            return result;
+            return books;
         }
         public BookEM Get(int BookId)
         {

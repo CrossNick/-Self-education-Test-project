@@ -22,3 +22,12 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#navbar_header {
+    color: white;
+    margin-right: 10px;
+}
+
+.navbar {
+    border-radius: 0px;
+}

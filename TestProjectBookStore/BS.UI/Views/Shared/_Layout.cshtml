@@ -12,24 +12,20 @@
     @Scripts.Render("~/bundles/actions")
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-inverse">
-        
-
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Book Store</a>
+        </div>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="nav navbar-nav mr-auto">
-                <li class="nav-item">
-                    <h4 style="color:white; margin-right:10px;">Book Store</h4>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Show data
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li class="dropdown-item"><a id="getBooksLink" data-url="@Url.Action("GetBooks", "Home")" onclick="getBooksAjax()">Books</a></li>
-                        <li class="dropdown-item"><a id="getAuthorsLink" data-url="@Url.Action("GetAuthors", "Home")" onclick="getAuthorsAjax()">Authors</a></li>
-                    </ul>
-                </li>
+                <li><a id="getBooksLink" data-url="@Url.Action("GetBooks", "Home")" onclick="getBooksAjax()">Book Catalog</a></li>
+                <li><a id="getAuthorsLink" data-url="@Url.Action("GetAuthors", "Home")" onclick="getAuthorsAjax()">Authors</a></li>
 
             </ul>
         </div>
