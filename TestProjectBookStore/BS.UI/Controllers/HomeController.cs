@@ -22,10 +22,24 @@ namespace BS.UI.Controllers
         {
             return View();
         }
-
+        public ActionResult ViewBooks()
+        {
+            return View();
+        }
+        public ActionResult ViewAuthors()
+        {
+            return View();
+        }
         public JsonResult GetBooks()
         {
             var result = bookDM.GetBooks();
+            var res = Json(result, JsonRequestBehavior.AllowGet);
+            return res;
+        }
+
+        public JsonResult GetAuthors()
+        {
+            var result = authorDM.GetAuthors();
             var res = Json(result, JsonRequestBehavior.AllowGet);
             return res;
         }

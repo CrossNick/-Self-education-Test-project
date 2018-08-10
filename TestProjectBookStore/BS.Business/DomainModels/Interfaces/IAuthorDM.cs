@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BS.Business.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace BS.Business.DomainModels
 {
     public interface IAuthorDM
     {
+        IEnumerable<AuthorVM> GetAuthors();
     }
 }

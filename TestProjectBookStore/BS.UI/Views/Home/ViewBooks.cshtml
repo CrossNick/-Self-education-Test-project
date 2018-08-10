@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<table class="table">
+    <thead id="tablehead">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">FirstName</th>
+            <th scope="col">LastName</th>
+            <th scope="col">BooksCount</th>
+        </tr>
+    </thead>
+    <tbody id="tablebody" data-bind="foreach: authors">
+        <tr>
+            <td data-bind="text: AuthorId"></td>
+            <td data-bind="text: FirstName"></td>
+            <td data-bind="text: LastName"></td>
+            <td data-bind="text: BooksCount"></td>
+        </tr>
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        Actions.Initialize();
+    });
+</script>
