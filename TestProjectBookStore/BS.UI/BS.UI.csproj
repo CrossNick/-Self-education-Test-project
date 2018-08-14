@@ -203,6 +203,10 @@
     <Content Include="Views\Home\ViewBooks.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\ViewAuthors.cshtml" />
+    <Content Include="Views\Home\_CreateBookPopup.cshtml" />
+    <Content Include="Views\Home\_CreateAuthorPopup.cshtml" />
+    <Content Include="Views\Home\_EditBookPopup.cshtml" />
+    <Content Include="Views\Home\_EditAuthorPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
