@@ -25,5 +25,10 @@ namespace BS.UI.Controllers
             return Json(results, JsonRequestBehavior.AllowGet);
 
         }
+
+        public JsonResult Edit(BookVM book)
+        {
+            return Json(book.BookId);
+        }
     }
 }

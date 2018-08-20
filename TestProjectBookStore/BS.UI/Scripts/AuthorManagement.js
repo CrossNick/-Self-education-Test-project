@@ -29,7 +29,19 @@
         }).done(function (data) {
             self.viewModel.authors.removeAll();
             $(data).each(function (index, element) {
-                self.viewModel.authors.push(element);
+                var mappedItem =
+                    {
+                        AuthorId: ko.observable(element.AuthorId),
+                        FirstName: ko.observable(element.FirstName).extend({
+                            required: true
+                        }),
+                        LastName: ko.observable(element.LastName).extend({
+                            required: true
+                        }),
+                        BooksCount: ko.observable(element.BooksCount),
+                        Mode: ko.observable("display")
+                    };
+                self.viewModel.authors.push(mappedItem);
             });
         }).error(function (ex) {
             alert("Error");
@@ -38,6 +50,7 @@
 
     self.Initialize = function () {
         ko.applyBindings(self.viewModel);
+
         $('#author-create-save').click(function () {
             OnSaveButtonClick();
         });

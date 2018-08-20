@@ -16,17 +16,39 @@
         </tr>
     </thead>
     <tbody id="tablebody" data-bind="foreach: authors">
-        <tr>
-
-            <td data-bind="text: FirstName"></td>
-            <td data-bind="text: LastName"></td>
-            <td data-bind="text: BooksCount"></td>
-            <td></td>
+        <tr data-bind="template: { name: Mode, data: $data }">
         </tr>
     </tbody>
 </table>
+<script type="text/html" id="display">
+    <td data-bind="text: FirstName"></td>
+    <td data-bind="text: LastName"></td>
+    <td data-bind="text: BooksCount"></td>
+    <td>
+        <button class="btn btn-success kout-edit">Edit</button>
+        <button class="btn btn-danger kout-delete">Delete</button>
+    </td>
+</script>
+<script type="text/html" id="edit">
+    <td><input class="form-control" type="text" data-bind="value: FirstName" /></td>
+    <td><input class="form-control" type="text" data-bind="value: LastName" /></td>
+    <td data-bind="text: BooksCount"></td>
+    <td>
+        <button class="btn btn-success kout-update">Update</button>
+        <button class="btn btn-danger kout-cancel">Cancel</button>
+    </td>
+</script>
 <script>
     $(document).ready(function () {
         AuthorManagement.Initialize();
     });
+    $(document).on("click", ".kout-edit", null, function (ev) {
+        var current = ko.dataFor(this);
+        current.Mode("edit");
+    })
+
+    $(document).on("click", ".kout-update", null, function (ev) {
+        var current = ko.dataFor(this);
+        current.Mode("display");
+    })
 </script>
