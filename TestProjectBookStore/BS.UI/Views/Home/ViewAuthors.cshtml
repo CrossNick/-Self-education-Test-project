@@ -1,34 +1,32 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@Html.Partial("_CreateAuthorPopup")
 
-
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-author-modal">
+    Add Author
+</button>
 <table class="table">
     <thead id="tablehead">
         <tr>
-            <th scope="col">AuthorId</th>
-            <th scope="col">Title</th>
-            <th scope="col">ReleaseDate</th>
-            <th scope="col">Authors</th>
-            <th scope="col">Rating</th>
-            <th scope="col">PageCount</th>
+            <th scope="col">FirstName</th>
+            <th scope="col">LastName</th>
+            <th scope="col">BooksCount</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
-    <tbody id="tablebody" data-bind="foreach: books">
+    <tbody id="tablebody" data-bind="foreach: authors">
         <tr>
-            <td data-bind="text: BookId"></td>
-            <td data-bind="text: Title"></td>
-            <td data-bind="text: ReleaseDate"></td>
-            <td data-bind="foreach: Authors">
-                <div><a><span data-bind="text: FirstName"></span> <span data-bind="text: LastName"></span></a>, </div>
-            </td>
-            <td data-bind="text: Rating"></td>
-            <td data-bind="text: PageCount"></td>
+
+            <td data-bind="text: FirstName"></td>
+            <td data-bind="text: LastName"></td>
+            <td data-bind="text: BooksCount"></td>
+            <td></td>
         </tr>
     </tbody>
 </table>
 <script>
     $(document).ready(function () {
-        Actions.Initialize();
+        AuthorManagement.Initialize();
     });
 </script>

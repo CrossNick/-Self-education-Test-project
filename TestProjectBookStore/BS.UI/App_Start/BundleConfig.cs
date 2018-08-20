@@ -24,15 +24,19 @@ namespace BS.UI
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js",
+                      "~/Scripts/select2.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/actions").Include(
-                      "~/Scripts/Actions.js"
+                      "~/Scripts/Actions.js",
+                       "~/Scripts/BookManagement.js",
+                       "~/Scripts/AuthorManagement.js"
                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/BS.css"));
+                      "~/Content/BS.css",
+                      "~/Content/select2.css"));
         }
     }
 }

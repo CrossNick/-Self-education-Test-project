@@ -17,12 +17,19 @@ namespace BS.Data.Repositories
         private const string SP_GET_AUTHOR = "USPGetAuthor";
         private const string SP_UPDATE_AUTHOR = "USPUpdateAuthor";
 
+        List<AuthorEM> authors = new List<AuthorEM>(){
+                new AuthorEM(){AuthorId=1, FirstName="John", LastName="Smith", BooksCount=2},
+                new AuthorEM(){AuthorId=2, FirstName="James", LastName="Mitch", BooksCount=3},
+                new AuthorEM(){AuthorId=3, FirstName="Joe", LastName="Truth", BooksCount=2}
+            };
+
         public AuthorEM Create(AuthorEM author)
         {
-            using (IDbConnection db = new SqlConnection("DefaultConnection"))
-            {
-                author.AuthorId = db.Query<int>(SP_INSERT_AUTHOR, author, null, true, null, CommandType.StoredProcedure).FirstOrDefault();
-            }
+            //using (IDbConnection db = new SqlConnection("DefaultConnection"))
+            //{
+            //    author.AuthorId = db.Query<int>(SP_INSERT_AUTHOR, author, null, true, null, CommandType.StoredProcedure).FirstOrDefault();
+            //}
+            authors.Add(author);
             return author;
         }
 
@@ -36,17 +43,11 @@ namespace BS.Data.Repositories
 
         public IEnumerable<AuthorEM> Get()
         {
-            IEnumerable<AuthorEM> result;
-            result = new List<AuthorEM>(){
-                new AuthorEM(){AuthorId=1, FirstName="John", LastName="Smith", BooksCount=2},
-                new AuthorEM(){AuthorId=2, FirstName="James", LastName="Mitch", BooksCount=3},
-                new AuthorEM(){AuthorId=2, FirstName="Joe", LastName="Truth", BooksCount=2}
-            };
             //using (IDbConnection db = new SqlConnection("DefaultConnection"))
             //{
             //    result = db.Query<AuthorEM>(SP_GET_AUTHOR, null, null, true, null, CommandType.StoredProcedure);
             //}
-            return result;
+            return authors;
         }
         public AuthorEM Get(int AuthorId)
         {

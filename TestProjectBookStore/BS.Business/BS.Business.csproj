@@ -81,6 +81,7 @@
     <Compile Include="UnityInitializer.cs" />
     <Compile Include="ViewModels\AuthorVM.cs" />
     <Compile Include="ViewModels\BookVM.cs" />
+    <Compile Include="ViewModels\Select2AuthorsVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BS.Data\BS.Data.csproj">

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BS.Business.ViewModels;
+using BS.Data.EntityModels;
 using BS.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,19 @@ namespace BS.Business.DomainModels
         {
             var result = Mapper.Map<IEnumerable<AuthorVM>>(repo.Get());
             return result;
+        }
+
+        public IEnumerable<Select2AuthorsVM> GetAuthorsSelect2()
+        {
+            var result = Mapper.Map<IEnumerable<Select2AuthorsVM>>(repo.Get());
+            return result;
+        }
+
+        public AuthorVM AddAuthor(AuthorVM author)
+        {
+            var param = Mapper.Map<AuthorEM>(author);
+            repo.Create(param);
+            return author;
         }
 
     }
