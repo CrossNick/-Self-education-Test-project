@@ -49,8 +49,8 @@
         });
     }
 
-    function saveData(currentData) {
-        var postUrl = "";
+    self.saveData = function(currentData) {
+        var postUrl = "/Book/Edit";
         var submitData = {
             BookId: currentData.BookId(),
             Title: currentData.Title(),
@@ -59,19 +59,13 @@
             Rating: currentData.Rating(),
             PageCount: currentData.PageCount()
         };
-        if (currentData.Id && currentData.Id > 0) {
-            postUrl = "/Book/Edit"
-        }
-        else {
-            postUrl = "/Book/Create"
-        }
         $.ajax({
             type: "POST",
             contentType: "application/json",
             url: postUrl,
             data: JSON.stringify(submitData)
         }).done(function (id) {
-            currentData.Id(id);
+            currentData.BookId(id);
         }).error(function (ex) {
             alert("ERROR Saving");
         })
@@ -87,7 +81,7 @@
         $("#book-create").click(function () {
             OnAddButtonClick();
         });
-        $("#edit-book-button").click(function () {
+        $(".kout-edit").click(function () {
             OnEditClick();
         });
         

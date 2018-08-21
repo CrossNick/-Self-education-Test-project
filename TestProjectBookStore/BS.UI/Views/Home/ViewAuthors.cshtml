@@ -49,6 +49,7 @@
 
     $(document).on("click", ".kout-update", null, function (ev) {
         var current = ko.dataFor(this);
+        AuthorManagement.saveData(current);
         current.Mode("display");
     })
 </script>

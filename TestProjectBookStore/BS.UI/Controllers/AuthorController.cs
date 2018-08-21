@@ -24,5 +24,10 @@ namespace BS.UI.Controllers
             var result = authorDM.AddAuthor(author);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult Edit(AuthorVM author)
+        {
+            return Json(author.AuthorId);
+        }
     }
 }

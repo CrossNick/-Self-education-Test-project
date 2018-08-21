@@ -48,6 +48,26 @@
         });
     }
 
+    self.saveData = function (currentData) {
+        var postUrl = "/Author/Edit";
+        var submitData = {
+            AuthorId: currentData.AuthorId(),
+            FirstName: currentData.FirstName(),
+            LastName: currentData.LastName(),
+            BooksCount: currentData.BooksCount()
+        };
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: postUrl,
+            data: JSON.stringify(submitData)
+        }).done(function (id) {
+            currentData.AuthorId(id);
+        }).error(function (ex) {
+            alert("ERROR Saving");
+        })
+    }
+
     self.Initialize = function () {
         ko.applyBindings(self.viewModel);
 
