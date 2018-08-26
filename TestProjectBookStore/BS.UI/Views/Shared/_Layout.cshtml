@@ -12,7 +12,11 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/actions")
-
+    <script>
+        $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
+            alert(thrownError);
+        });
+    </script>
 </head>
 <body>
     <nav class="navbar navbar-inverse">

@@ -29,5 +29,10 @@ namespace BS.UI.Controllers
         {
             return Json(author.AuthorId);
         }
+
+        public JsonResult Delete(AuthorVM author)
+        {
+            return Json(author.AuthorId);
+        }
     }
 }

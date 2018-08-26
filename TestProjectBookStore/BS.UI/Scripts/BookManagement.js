@@ -8,14 +8,12 @@
     function OnAddButtonClick() {
         $('#create-book-authors').select2(
             $.ajax({
-                url: "/Book/GetAuthors",
+                url: $('#book-create').data('url'),
                 processResults: function (data) {
                     return {
                         results: data.items
                     };
                 }
-            }).error(function (ex) {
-                alert(ex);
             })
         );
         $('#create-book-modal').modal('show');
@@ -44,13 +42,10 @@
                     };
                 self.viewModel.books.push(mappedItem);
             });
-        }).error(function (ex) {
-            alert("Error");
         });
     }
 
     self.saveData = function(currentData) {
-        var postUrl = "/Book/Edit";
         var submitData = {
             BookId: currentData.BookId(),
             Title: currentData.Title(),
@@ -62,19 +57,40 @@
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: postUrl,
+            url: $('#book-update').data('url'),
             data: JSON.stringify(submitData)
         }).done(function (id) {
             currentData.BookId(id);
-        }).error(function (ex) {
-            alert("ERROR Saving");
-        })
+        });
     }
 
     function OnEditClick() {
         var current = ko.dataFor(this);
         current.Mode("edit");
     }
+
+    self.OnDeleteClick = function(current)
+    {
+        var submitData = {
+            BookId: current.BookId(),
+            Title: current.Title(),
+            ReleaseDate: current.ReleaseDate(),
+            Authors: current.Authors(),
+            Rating: current.Rating(),
+            PageCount: current.PageCount()
+        };
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: $('#book-delete').data('url'),
+            data: JSON.stringify(submitData)
+        }).done(function () {
+            self.viewModel.books.remove(function (book) {
+                return book.BookId == current.BookId;
+            });
+        });
+    }
+
     self.Initialize = function () {
         ko.applyBindings(self.viewModel);
         getBooksAjax();

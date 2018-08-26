@@ -3,7 +3,7 @@
 }
 @Html.Partial("_CreateAuthorPopup")
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-author-modal">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-author-modal" >
     Add Author
 </button>
 <table class="table">
@@ -26,7 +26,7 @@
     <td data-bind="text: BooksCount"></td>
     <td>
         <button class="btn btn-success kout-edit">Edit</button>
-        <button class="btn btn-danger kout-delete">Delete</button>
+        <button class="btn btn-danger kout-delete" id="author-delete" data-url=@Url.Action("Delete", "Author")>Delete</button>
     </td>
 </script>
 <script type="text/html" id="edit">
@@ -34,7 +34,7 @@
     <td><input class="form-control" type="text" data-bind="value: LastName" /></td>
     <td data-bind="text: BooksCount"></td>
     <td>
-        <button class="btn btn-success kout-update">Update</button>
+        <button class="btn btn-success kout-update" id="author-edit" data-url=@Url.Action("Edit", "Author")>Update</button>
         <button class="btn btn-danger kout-cancel">Cancel</button>
     </td>
 </script>
@@ -51,5 +51,10 @@
         var current = ko.dataFor(this);
         AuthorManagement.saveData(current);
         current.Mode("display");
+    })
+
+    $(document).on("click", ".kout-delete", null, function (ev) {
+        var current = ko.dataFor(this);
+        AuthorManagement.OnDeleteClick(current);
     })
 </script>

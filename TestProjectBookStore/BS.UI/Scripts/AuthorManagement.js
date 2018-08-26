@@ -10,7 +10,7 @@
     function OnSaveButtonClick() {
         $.ajax({
             type: "GET",
-            url: '/Author/AddAuthor',
+            url: $('#author-create-save').data('url'),
             data: {
                 FirstName: $('#create-author-fname').val(),
                 LastName: $('#create-author-lname').val()
@@ -43,13 +43,10 @@
                     };
                 self.viewModel.authors.push(mappedItem);
             });
-        }).error(function (ex) {
-            alert("Error");
         });
     }
 
     self.saveData = function (currentData) {
-        var postUrl = "/Author/Edit";
         var submitData = {
             AuthorId: currentData.AuthorId(),
             FirstName: currentData.FirstName(),
@@ -58,14 +55,31 @@
         };
         $.ajax({
             type: "POST",
-            contentType: "application/json",
+            contentType: $('#author-edit').data('url'),
             url: postUrl,
             data: JSON.stringify(submitData)
         }).done(function (id) {
             currentData.AuthorId(id);
-        }).error(function (ex) {
-            alert("ERROR Saving");
-        })
+        });
+    }
+
+    self.OnDeleteClick = function (current) {
+        var submitData = {
+            AuthorId: current.AuthorId(),
+            FirstName: current.FirstName(),
+            LastName: current.LastName(),
+            BooksCount: current.BooksCount()
+        };
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: $('#author-delete').data('url'),
+            data: JSON.stringify(submitData)
+        }).done(function () {
+            self.viewModel.authors.remove(function (author) {
+                return author.AuthorId == current.AuthorId;
+            });
+        });
     }
 
     self.Initialize = function () {

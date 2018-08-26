@@ -119,3 +119,13 @@ C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjec
 C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\System.ValueTuple.xml
 C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\Dapper.xml
 C:\Users\vasenin.nikita\Documents\GitHub\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\BS.Data.dll.config
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\BS.Data.dll
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\AutoMapper.dll
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\Dapper.dll
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\System.ValueTuple.dll
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\BS.Data.pdb
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\BS.Data.dll.config
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\AutoMapper.pdb
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\AutoMapper.xml
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\Dapper.xml
+D:\Programming\Practice\-Self-education-Test-project\TestProjectBookStore\BS.UI\bin\System.ValueTuple.xml

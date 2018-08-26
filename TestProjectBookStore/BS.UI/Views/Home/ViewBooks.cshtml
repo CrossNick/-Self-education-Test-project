@@ -33,7 +33,7 @@
     <td data-bind="text: PageCount"></td>
     <td>
         <button id ="edit-book-button" class="btn btn-success kout-edit">Edit</button>
-        <button class="btn btn-danger kout-delete">Delete</button>
+        <button class="btn btn-danger kout-delete" id="book-delete" data-url=@Url.Action("Delete", "Book")>Delete</button>
     </td>
 </script>
 <script type="text/html" id="edit">
@@ -45,7 +45,7 @@
     <td><input class="form-control" type="number" data-bind="value: Rating" min="0" max="10"></td>
     <td><input class="form-control" type="number"  data-bind="value: PageCount"></td>
     <td>
-        <button class="btn btn-success kout-update">Update</button>
+        <button class="btn btn-success kout-update" id="book-update" data-url=@Url.Action("Edit", "Book")>Update</button>
         <button class="btn btn-danger kout-cancel">Cancel</button>
     </td>
 </script>
@@ -62,6 +62,11 @@
         var current = ko.dataFor(this);
         BookManagement.saveData(current);
         current.Mode("display");
+    })
+
+    $(document).on("click", ".kout-delete", null, function (ev) {
+        var current = ko.dataFor(this);
+        BookManagement.OnDeleteClick(current);
     })
 </script>
 
