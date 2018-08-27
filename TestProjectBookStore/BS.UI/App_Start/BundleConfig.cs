@@ -20,7 +20,8 @@ namespace BS.UI
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
-                         "~/Scripts/knockout-3.4.2.js"));
+                         "~/Scripts/knockout-3.4.2.js",
+                         "~/Scripts/knockout.mapping-latest.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",

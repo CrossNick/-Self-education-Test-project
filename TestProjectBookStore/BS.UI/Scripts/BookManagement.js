@@ -1,4 +1,6 @@
 ﻿var BookManagement = BookManagement || {};
+//TODO: Bootstrap layout and gri
+//TODO: CHeck mapping
 (function () {
     var self = this;
     self.viewModel = {
@@ -24,22 +26,23 @@
             type: "GET",
             url: $('#getBooksLink').data('url'),
         }).done(function (data) {
-            self.viewModel.books.removeAll();
-            $(data).each(function (index, element) {
-                var mappedItem =
-                    {
-                        BookId: ko.observable(element.BookId),
-                        Title: ko.observable(element.Title).extend({
-                            required: true
-                        }),
-                        ReleaseDate: ko.observable(element.ReleaseDate).extend({
-                            required: true
-                        }),
-                        Authors: ko.observableArray(element.Authors),
-                        Rating: ko.observable(element.Rating),
-                        PageCount: ko.observable(element.PageCount),
-                        Mode: ko.observable("display")
-                    };
+            ko.mapping.fromJS(data, {}, self.viewModel.books);
+            $(self.viewModel.books).each(function (index, element) {
+                element.Title = ko.observable(element.Title).extend({
+                    required: true
+                });
+                element.ReleaseDate = ko.observable(element.ReleaseDate).extend({
+                    required: true
+                });
+                    //    ReleaseDate: ko.observable(element.ReleaseDate).extend({
+                    //        required: true
+                    //    }),
+                    //    Authors: ko.observableArray(element.Authors),
+                    //    Rating: ko.observable(element.Rating),
+                    //    PageCount: ko.observable(element.PageCount),
+                    //    Mode: ko.observable("display")
+                    //};
+                element.Mode = ko.observable("display");
                 self.viewModel.books.push(mappedItem);
             });
         });
