@@ -12,5 +12,6 @@ namespace BS.Business.ViewModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int BooksCount { get; set; }
+        public string Mode { get; set; }
     }
 }

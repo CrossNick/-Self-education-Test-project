@@ -33,8 +33,8 @@ namespace BS.UI.Controllers
         public JsonResult GetBooks()
         {
             var result = bookDM.GetBooks();
-            var res = Json(result, JsonRequestBehavior.AllowGet);
-            return res;
+            var books = Json(result, JsonRequestBehavior.AllowGet);
+            return books;
         }
 
         public JsonResult GetAuthors()

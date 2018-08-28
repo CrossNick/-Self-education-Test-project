@@ -22,6 +22,10 @@ namespace BS.Business.DomainModels
         public IEnumerable<AuthorVM> GetAuthors()
         {
             var result = Mapper.Map<IEnumerable<AuthorVM>>(repo.Get());
+            foreach (var author in result)
+            {
+                author.Mode = "display";
+            }
             return result;
         }
 

@@ -26,6 +26,7 @@ namespace BS.Business.DomainModels
             foreach(var book in result)
             {
                 book.Authors = Mapper.Map<IEnumerable<AuthorVM>>(authorRepo.GetAuthors(book.BookId));
+                book.Mode = "display";
             }
             return result;
         }

@@ -1,6 +1,5 @@
 ﻿var BookManagement = BookManagement || {};
-//TODO: Bootstrap layout and gri
-//TODO: CHeck mapping
+//TODO: Bootstrap layout and grid
 (function () {
     var self = this;
     self.viewModel = {
@@ -26,37 +25,21 @@
             type: "GET",
             url: $('#getBooksLink').data('url'),
         }).done(function (data) {
-            ko.mapping.fromJS(data, {}, self.viewModel.books);
-            $(self.viewModel.books).each(function (index, element) {
-                element.Title = ko.observable(element.Title).extend({
-                    required: true
-                });
-                element.ReleaseDate = ko.observable(element.ReleaseDate).extend({
-                    required: true
-                });
-                    //    ReleaseDate: ko.observable(element.ReleaseDate).extend({
-                    //        required: true
-                    //    }),
-                    //    Authors: ko.observableArray(element.Authors),
-                    //    Rating: ko.observable(element.Rating),
-                    //    PageCount: ko.observable(element.PageCount),
-                    //    Mode: ko.observable("display")
-                    //};
-                element.Mode = ko.observable("display");
-                self.viewModel.books.push(mappedItem);
-            });
+            var model = { books: data };
+            ko.mapping.fromJS(model, {}, self.viewModel);
+            //$(self.viewModel.books).each(function (index, element) {
+            //    element.Title = ko.observable(element.Title).extend({
+            //        required: true
+            //    });
+            //    element.ReleaseDate = ko.observable(element.ReleaseDate).extend({
+            //        required: true
+            //    });
+            //});
         });
     }
 
     self.saveData = function(currentData) {
-        var submitData = {
-            BookId: currentData.BookId(),
-            Title: currentData.Title(),
-            ReleaseDate: currentData.ReleaseDate(),
-            Authors: currentData.Authors(),
-            Rating: currentData.Rating(),
-            PageCount: currentData.PageCount()
-        };
+       var submitData = ko.mapping.toJS(currentData);//{
         $.ajax({
             type: "POST",
             contentType: "application/json",
@@ -74,14 +57,7 @@
 
     self.OnDeleteClick = function(current)
     {
-        var submitData = {
-            BookId: current.BookId(),
-            Title: current.Title(),
-            ReleaseDate: current.ReleaseDate(),
-            Authors: current.Authors(),
-            Rating: current.Rating(),
-            PageCount: current.PageCount()
-        };
+        var submitData = ko.mapping.toJS(current);
         $.ajax({
             type: "POST",
             contentType: "application/json",

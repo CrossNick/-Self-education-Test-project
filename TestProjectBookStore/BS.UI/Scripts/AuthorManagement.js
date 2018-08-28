@@ -27,36 +27,25 @@
             type: "GET",
             url: $('#getAuthorsLink').data('url'),
         }).done(function (data) {
-            self.viewModel.authors.removeAll();
-            $(data).each(function (index, element) {
-                var mappedItem =
-                    {
-                        AuthorId: ko.observable(element.AuthorId),
-                        FirstName: ko.observable(element.FirstName).extend({
-                            required: true
-                        }),
-                        LastName: ko.observable(element.LastName).extend({
-                            required: true
-                        }),
-                        BooksCount: ko.observable(element.BooksCount),
-                        Mode: ko.observable("display")
-                    };
-                self.viewModel.authors.push(mappedItem);
-            });
+            var model = { authors: data };
+            ko.mapping.fromJS(model, {}, self.viewModel);
+            //$(self.viewModel.authors).each(function (index, element) {
+            //    element.FirstName = ko.observable(element.FirstName).extend({
+            //        required: true
+            //    });
+            //    element.LastName = ko.observable(element.LastName).extend({
+            //        required: true
+            //    });
+            //});
         });
     }
 
     self.saveData = function (currentData) {
-        var submitData = {
-            AuthorId: currentData.AuthorId(),
-            FirstName: currentData.FirstName(),
-            LastName: currentData.LastName(),
-            BooksCount: currentData.BooksCount()
-        };
+        var submitData = ko.mapping.toJS(currentData);
         $.ajax({
             type: "POST",
-            contentType: $('#author-edit').data('url'),
-            url: postUrl,
+            contentType: "application/json",
+            url: $('#author-edit').data('url'),
             data: JSON.stringify(submitData)
         }).done(function (id) {
             currentData.AuthorId(id);
@@ -64,12 +53,7 @@
     }
 
     self.OnDeleteClick = function (current) {
-        var submitData = {
-            AuthorId: current.AuthorId(),
-            FirstName: current.FirstName(),
-            LastName: current.LastName(),
-            BooksCount: current.BooksCount()
-        };
+        var submitData = ko.mapping.toJS(current);
         $.ajax({
             type: "POST",
             contentType: "application/json",

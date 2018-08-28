@@ -63,11 +63,21 @@
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Scripts" />
     <Folder Include="dbo\Scripts\Post-Deployment" />
+    <Folder Include="dbo\Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Book.sql" />
     <Build Include="dbo\Tables\Author.sql" />
     <Build Include="dbo\Tables\BookAuthor.sql" />
+    <Build Include="dbo\Stored Procedures\USPAuthorInsert.sql" />
+    <Build Include="dbo\Stored Procedures\USPAuthorDelete.sql" />
+    <Build Include="dbo\Stored Procedures\USPGetAuthor.sql" />
+    <Build Include="dbo\Stored Procedures\USPUpdateAuthor.sql" />
+    <Build Include="dbo\Stored Procedures\USPBookInsert.sql" />
+    <Build Include="dbo\Stored Procedures\USPBookAuthorInsert.sql" />
+    <Build Include="dbo\Stored Procedures\USPBookDelete.sql" />
+    <Build Include="dbo\Stored Procedures\USPGetBook.sql" />
+    <Build Include="dbo\Stored Procedures\USPUpdateBook.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\Scripts\Post-Deployment\1_Book_Insert.sql" />

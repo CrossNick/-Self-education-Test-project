@@ -14,5 +14,6 @@ namespace BS.Business.ViewModels
         public IEnumerable<AuthorVM> Authors { get; set; }
         public float Rating { get; set; }
         public int PageCount { get; set; }
+        public string Mode { get; set; }
     }
 }
