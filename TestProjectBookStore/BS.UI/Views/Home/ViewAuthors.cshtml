@@ -3,23 +3,33 @@
 }
 @Html.Partial("_CreateAuthorPopup")
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-author-modal" >
-    Add Author
-</button>
-<table class="table">
-    <thead id="tablehead">
-        <tr>
-            <th scope="col">FirstName</th>
-            <th scope="col">LastName</th>
-            <th scope="col">BooksCount</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody id="tablebody" data-bind="foreach: authors">
-        <tr data-bind="template: { name: Mode, data: $data }">
-        </tr>
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1 offset-lg-2 offset-md-2 offset-sm-2">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-author-modal">
+            Add Author
+        </button>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-lg-10 col-md-10 col-sm-10">
+        <table class="table">
+            <thead id="tablehead">
+                <tr>
+                    <th scope="col">FirstName</th>
+                    <th scope="col">LastName</th>
+                    <th scope="col">BooksCount</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tablebody" data-bind="foreach: authors">
+                <tr data-bind="template: { name: Mode, data: $data }"></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
 <script type="text/html" id="display">
     <td data-bind="text: FirstName"></td>
     <td data-bind="text: LastName"></td>
