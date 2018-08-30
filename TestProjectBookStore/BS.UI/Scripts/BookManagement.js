@@ -7,19 +7,17 @@
     };
 
     function OnAddButtonClick() {
-        $('#create-book-authors').select2(
-            $.ajax({
-                url: $('#book-create').data('url'),
-                processResults: function (data) {
-                    return {
-                        results: data.items
-                    };
-                }
-            })
-        );
+        $('#create-book-authors').select2();
+        
         $('#create-book-modal').modal('show');
     }
 
+    function UpdateSelect2() {
+        $('.select-author').select2();
+    }
+    function LoadAuthorsSelect() {
+
+    }
     function getBooksAjax() {
         $.ajax({
             type: "GET",
@@ -73,6 +71,7 @@
     self.Initialize = function () {
         ko.applyBindings(self.viewModel);
         getBooksAjax();
+        UpdateSelect2();
         $("#book-create").click(function () {
             OnAddButtonClick();
         });

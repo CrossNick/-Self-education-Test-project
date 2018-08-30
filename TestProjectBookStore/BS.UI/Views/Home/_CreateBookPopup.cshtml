@@ -15,7 +15,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Authors: </label>
-                        <select id="create-book-authors"  class="form-control" name="Authors"></select>
+                        <select id="create-book-authors" class="form-control" name="Authors[]"></select>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Release date: </label>
@@ -34,3 +34,8 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('.select-author').select2();
+        })
+</script>

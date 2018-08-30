@@ -48,7 +48,7 @@
     <td><input class="form-control" type="text" data-bind="value: Title" /></td>
     <td><input class="form-control" type="date" data-bind="value: ReleaseDate" /></td>
     <td>
-        <select id="edit-book-authors" class="form-control" name="Authors" data-bind="options: Authors, optionsText: 'FirstName', value: 'AuthorId'"></select>
+        <select id="edit-book-authors" class="form-control select-author" multiple name="Authors" data-bind="options: Authors, optionsText: 'FirstName', value: 'AuthorId'"></select>
     </td>
     <td><input class="form-control" type="number" data-bind="value: Rating" min="0" max="10"></td>
     <td><input class="form-control" type="number" data-bind="value: PageCount"></td>
