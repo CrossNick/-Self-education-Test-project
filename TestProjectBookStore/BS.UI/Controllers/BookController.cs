@@ -21,7 +21,7 @@ namespace BS.UI.Controllers
 
         public JsonResult GetAuthors()
         {
-            var results = authorDM.GetAuthorsSelect2();
+            var results = authorDM.GetAuthors();
             return Json(results, JsonRequestBehavior.AllowGet);
 
         }

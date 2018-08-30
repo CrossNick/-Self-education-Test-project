@@ -3,7 +3,8 @@
 (function () {
     var self = this;
     self.viewModel = {
-        books: ko.observableArray()
+        books: ko.observableArray(),
+        allauthors: ko.observableArray(),
     };
 
     function OnAddButtonClick() {
@@ -13,11 +14,18 @@
     }
 
     function UpdateSelect2() {
-        $('.select-author').select2();
+        $('#edit-book-authors').select2();
     }
-    function LoadAuthorsSelect() {
+    function getAllAuthors() {
+        $.ajax({
+            type: "GET",
+            url: $('#book-create').data('url'),
+        }).done(function (data) {
+            var model = { allauthors: data };
+            ko.mapping.fromJS(model, {}, self.viewModel);
+        });
+    } 
 
-    }
     function getBooksAjax() {
         $.ajax({
             type: "GET",
@@ -25,14 +33,6 @@
         }).done(function (data) {
             var model = { books: data };
             ko.mapping.fromJS(model, {}, self.viewModel);
-            //$(self.viewModel.books).each(function (index, element) {
-            //    element.Title = ko.observable(element.Title).extend({
-            //        required: true
-            //    });
-            //    element.ReleaseDate = ko.observable(element.ReleaseDate).extend({
-            //        required: true
-            //    });
-            //});
         });
     }
 
@@ -51,6 +51,7 @@
     function OnEditClick() {
         var current = ko.dataFor(this);
         current.Mode("edit");
+        UpdateSelect2();
     }
 
     self.OnDeleteClick = function(current)
@@ -71,6 +72,7 @@
     self.Initialize = function () {
         ko.applyBindings(self.viewModel);
         getBooksAjax();
+        getAllAuthors();
         UpdateSelect2();
         $("#book-create").click(function () {
             OnAddButtonClick();
