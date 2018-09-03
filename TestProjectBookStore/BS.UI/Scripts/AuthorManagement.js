@@ -7,20 +7,6 @@
         authors: ko.observableArray()
     };
 
-    function OnSaveButtonClick() {
-        $.ajax({
-            type: "GET",
-            url: $('#author-create-save').data('url'),
-            data: {
-                FirstName: $('#create-author-fname').val(),
-                LastName: $('#create-author-lname').val()
-            }
-        }).done(function (data) {
-            self.viewModel.authors.push(data);
-            $('#create-author-modal').modal('hide');
-            
-        });
-    }
 
     function getAuthorsAjax() {
         $.ajax({
@@ -39,6 +25,20 @@
             //});
         });
     }
+
+    self.OnCreateSubmitClick = function () {
+        var model = {
+            FirstName: $('#create-author-fname').val(),
+            LastName: $('#create-author-lname').val()
+        };
+        $.ajax({
+            type: "POST",
+            url: $('#create-author-form').data('url'),
+            data: model
+        }).done(function () {
+            
+        });
+    } 
 
     self.saveData = function (currentData) {
         var submitData = ko.mapping.toJS(currentData);
@@ -69,8 +69,9 @@
     self.Initialize = function () {
         ko.applyBindings(self.viewModel);
 
-        $('#author-create-save').click(function () {
-            OnSaveButtonClick();
+       
+        $("#author-create-save").click(function () {
+            self.OnCreateSubmitClick();
         });
         getAuthorsAjax();
         

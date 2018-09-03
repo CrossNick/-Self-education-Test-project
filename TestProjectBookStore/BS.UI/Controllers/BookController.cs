@@ -37,5 +37,11 @@ namespace BS.UI.Controllers
 
             return Json(book.BookId);
         }
+
+        public void Create(BookCreateVM book)
+        {
+
+            
+        }
     }
 }

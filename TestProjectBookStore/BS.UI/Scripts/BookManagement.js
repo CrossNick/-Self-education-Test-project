@@ -8,7 +8,9 @@
     };
 
     function OnAddButtonClick() {
-        $('#create-book-authors').select2();
+        $('#create-book-authors').select2({
+            width: 'resolve'
+        });
         
         $('#create-book-modal').modal('show');
     }
@@ -54,6 +56,23 @@
         UpdateSelect2();
     }
 
+    self.OnCreateSubmitClick = function() {
+        var model = {
+            Title: $('#create-book-title').val(),
+            ReleaseDate: $('#create-book-date').val(),
+            Rating: $('#create-book-rating').val(),
+            PageCount: $('#create-book-pagecount').val(),
+            Authors: $('#create-book-authors').val()
+        };
+        $.ajax({
+            type: "POST",
+            url: $('#create-book-form').data('url'),
+            data: model
+        }).done(function () {
+            
+        });
+    } 
+
     self.OnDeleteClick = function(current)
     {
         var submitData = ko.mapping.toJS(current);
@@ -79,6 +98,9 @@
         });
         $(".kout-edit").click(function () {
             OnEditClick();
+        });
+        $("#book-create-submit").click(function () {
+            self.OnCreateSubmitClick();
         });
         
     }
