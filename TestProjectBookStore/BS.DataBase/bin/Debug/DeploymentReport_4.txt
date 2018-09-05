@@ -1,0 +1,28 @@
+﻿** Выделение
+     Таблицы, которые будут перестроены
+       Нет
+     Кластеризованные индексы, которые будут удалены
+       Нет
+     Кластеризованные индексы, которые будут созданы
+       Нет
+     Возможные проблемы, связанные с данными
+       Нет
+
+** Действия пользователя
+     Создать
+       [dbo].[Author] (Таблица)
+       [dbo].[Book] (Таблица)
+       [dbo].[BookAuthor] (Таблица)
+       [dbo].[FK_BookAuthor_Author] (Внешний ключ)
+       [dbo].[FK_BookAuthor_Book] (Внешний ключ)
+       [dbo].[USPAuthorDelete] (Процедура)
+       [dbo].[USPAuthorInsert] (Процедура)
+       [dbo].[USPBookAuthorInsert] (Процедура)
+       [dbo].[USPBookDelete] (Процедура)
+       [dbo].[USPBookInsert] (Процедура)
+       [dbo].[USPGetAuthor] (Процедура)
+       [dbo].[USPGetBook] (Процедура)
+       [dbo].[USPUpdateAuthor] (Процедура)
+       [dbo].[USPUpdateBook] (Процедура)
+
+** Корректирующие действия

@@ -31,3 +31,7 @@ textarea {
 .navbar {
     border-radius: 0px;
 }
+
+.select2 {
+    width: 100%;
+}
