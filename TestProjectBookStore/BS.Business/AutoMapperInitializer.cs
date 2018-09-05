@@ -15,7 +15,8 @@ namespace BS.Business
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<BookEM, BookVM>();
+                cfg.CreateMap<BookEM, BookVM>()
+                    .ForMember(dest => dest.ReleaseDate, opt => opt.ResolveUsing(src => { return src.ReleaseDate.ToString("MM-dd-yyyy"); }));
                 cfg.CreateMap<AuthorEM, AuthorVM>()
                     .ForMember(dest => dest.FullName, opt=> opt.ResolveUsing(src=> { return src.FirstName + " " + src.LastName; }));
                 cfg.CreateMap<AuthorEM, Select2AuthorsVM>()

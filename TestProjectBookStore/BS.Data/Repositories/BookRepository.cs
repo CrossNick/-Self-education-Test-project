@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BS.Data.EntityModels;
+using System.Configuration;
 
 namespace BS.Data.Repositories
 {
@@ -17,6 +18,7 @@ namespace BS.Data.Repositories
         private const string SP_DELETE_BOOK= "USPBookDelete";
         private const string SP_GET_BOOK = "USPGetBook";
         private const string SP_UPDATE_BOOK = "USPUpdateBook";
+        private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         private List<BookEM> books = new List<BookEM>(){
                 new BookEM(){BookId=1, Title="Book 1", ReleaseDate=new DateTime(2010,1,1), Rating=10, PageCount=300},
@@ -27,7 +29,7 @@ namespace BS.Data.Repositories
 
         public BookEM Create(BookEM book)
         {
-            using (IDbConnection db = new SqlConnection("DefaultConnection"))
+            using (IDbConnection db = new SqlConnection(connectionString))
             {
                 DynamicParameters sqlParams = new DynamicParameters();
                 sqlParams.Add("@Title", book.Title, DbType.String);
@@ -42,7 +44,7 @@ namespace BS.Data.Repositories
 
         public void Delete(int BookId)
         {
-            using (IDbConnection db = new SqlConnection("DefaultConnection"))
+            using (IDbConnection db = new SqlConnection(connectionString))
             {
                 db.Query(SP_DELETE_BOOK, BookId, null, true, null, CommandType.StoredProcedure);
             }
@@ -51,7 +53,7 @@ namespace BS.Data.Repositories
         public IEnumerable<BookEM> Get()
         {
             //IEnumerable<BookEM> result;
-            //using (IDbConnection db = new SqlConnection("DefaultConnection"))
+            //using (IDbConnection db = new SqlConnection(connectionString))
             //{
             //    result = db.Query<BookEM>(SP_GET_BOOK, null,null,true,null,CommandType.StoredProcedure);
             //}
@@ -60,7 +62,7 @@ namespace BS.Data.Repositories
         public BookEM Get(int BookId)
         {
             BookEM result;
-            using (IDbConnection db = new SqlConnection("DefaultConnection"))
+            using (IDbConnection db = new SqlConnection(connectionString))
             {
                 result = db.Query<BookEM>(SP_GET_BOOK, BookId, null, true, null, CommandType.StoredProcedure).FirstOrDefault();
             }
@@ -69,7 +71,7 @@ namespace BS.Data.Repositories
 
         public void Update(BookEM entity)
         {
-            using (IDbConnection db = new SqlConnection("DefaultConnection"))
+            using (IDbConnection db = new SqlConnection(connectionString))
             {
                 db.Query(SP_UPDATE_BOOK, entity, null, true, null, CommandType.StoredProcedure);
             }

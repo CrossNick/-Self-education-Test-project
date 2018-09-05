@@ -19,11 +19,6 @@ namespace BS.UI.Controllers
             this.authorDM = authorDM;
         }
 
-        public JsonResult AddAuthor(AuthorVM author)
-        {
-            var result = authorDM.AddAuthor(author);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
 
         public JsonResult Edit(AuthorVM author)
         {
@@ -33,6 +28,12 @@ namespace BS.UI.Controllers
         public JsonResult Delete(AuthorVM author)
         {
             return Json(author.AuthorId);
+        }
+
+        public void Create(AuthorVM book)
+        {
+
+
         }
     }
 }

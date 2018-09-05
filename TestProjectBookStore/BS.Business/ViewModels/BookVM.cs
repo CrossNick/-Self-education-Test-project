@@ -10,8 +10,19 @@ namespace BS.Business.ViewModels
     {
         public int BookId { get; set; }
         public string Title { get; set; }
-        public DateTime ReleaseDate { get; set; }
+        public string ReleaseDate { get; set; }
         public IEnumerable<AuthorVM> Authors { get; set; }
+        public float Rating { get; set; }
+        public int PageCount { get; set; }
+        public string Mode { get; set; }
+    }
+
+    public class BookCreateVM
+    {
+        public int BookId { get; set; }
+        public string Title { get; set; }
+        public DateTime ReleaseDate { get; set; }
+        public IEnumerable<int> Authors { get; set; }
         public float Rating { get; set; }
         public int PageCount { get; set; }
         public string Mode { get; set; }
