@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[USPGetAuthor]
-    @param1 int = 0,
-    @param2 int
+    @AuthorId INT = NULL
 AS
-    SELECT @param1, @param2
-RETURN 0
+    SELECT * FROM Author
+    WHERE ISNULL(@AuthorId, Author.Id) = Author.Id
+

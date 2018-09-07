@@ -36,7 +36,7 @@
             url: $('#create-author-form').data('url'),
             data: model
         }).done(function () {
-            
+            $('#create-author-modal').modal('hide');
         });
     } 
 

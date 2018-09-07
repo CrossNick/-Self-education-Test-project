@@ -1,5 +1,4 @@
 ﻿var BookManagement = BookManagement || {};
-//TODO: Bootstrap layout and grid
 (function () {
     var self = this;
     self.viewModel = {
@@ -69,7 +68,7 @@
             url: $('#create-book-form').data('url'),
             data: model
         }).done(function () {
-            
+            $('#create-book-modal').modal('hide');
         });
     } 
 

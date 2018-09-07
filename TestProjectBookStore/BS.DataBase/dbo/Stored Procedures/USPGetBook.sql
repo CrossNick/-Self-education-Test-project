@@ -1,6 +1,31 @@
 ﻿CREATE PROCEDURE [dbo].[USPGetBook]
-    @param1 int = 0,
-    @param2 int
+    @BookId int = NULL
 AS
-    SELECT @param1, @param2
-RETURN 0
+    SELECT * FROM Book
+    WHERE ISNULL(@BookId, Book.Id) = Book.Id
+
+
+        --Cursor example
+
+      --DECLARE @Id INT;
+      --      DECLARE @Name VARCHAR(MAX);
+      --      DECLARE @FieldTypeId INT;
+      --      DECLARE @IsActive BIT;
+      --      DECLARE @NewCustomFieldId INT;
+
+      --      DECLARE @CustomFieldCursor CURSOR;
+
+
+      --      SET @CustomFieldCursor = CURSOR FORWARD_ONLY
+      --      FOR SELECT * FROM @Fields;
+
+      --      OPEN @CustomFieldCursor;
+      --      FETCH NEXT FROM @CustomFieldCursor INTO @Id,
+      --                                              @Name,
+      --                                              @FieldTypeId,
+      --                                              @IsActive;
+      --WHILE @@FETCH_STATUS = 0
+      --  FETCH NEXT FROM @CustomFieldCursor INTO @Id,
+      --                                                      @Name,
+      --                                                      @FieldTypeId,
+      --                                                      @IsActive;
