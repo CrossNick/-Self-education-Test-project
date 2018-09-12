@@ -5,7 +5,6 @@
 					[LastName]   NVARCHAR (50) NOT NULL,
 					[BooksCount] INT           NULL
                      ); 
-
 INSERT INTO @AuthorsToInsert
 VALUES
 		(1, 'Joanne', 'Rowling',3),
@@ -13,7 +12,7 @@ VALUES
 		(3, 'George', 'Martin', 3)
 
 INSERT INTO [dbo].[Author]
-SELECT [ai].[Id],
+SELECT 
 		[ai].[FirstName],
 		[ai].[LastName],
 		[ai].[BooksCount]

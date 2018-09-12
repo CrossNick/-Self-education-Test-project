@@ -1,31 +1,34 @@
 ﻿CREATE PROCEDURE [dbo].[USPGetBook]
     @BookId int = NULL
 AS
-    SELECT * FROM Book
-    WHERE ISNULL(@BookId, Book.Id) = Book.Id
+    BEGIN
+        SELECT Id as BookId, * FROM Book
+        WHERE ISNULL(@BookId, Id) = Id
+
+        DECLARE @Id INT;
+
+        DECLARE @CustomCursor CURSOR;
+
+        SET @CustomCursor = CURSOR FORWARD_ONLY
+        FOR
+        SELECT Id FROM Book
+        WHERE ISNULL(@BookId, Id) = Id
+
+        OPEN @CustomCursor 
+        FETCH NEXT FROM @CustomCursor INTO @Id;
 
 
-        --Cursor example
+        WHILE @@FETCH_STATUS = 0
+            BEGIN
+                SELECT  [a].Id AS AuthorId,
+	                    [a].FirstName AS FirstName,
+	                    [a].LastName AS LastName,
+	                    [a].BooksCount AS BooksCount
+                FROM Book [b]
+                LEFT JOIN BookAuthor [ba] ON [b].Id = [ba].BookId
+                LEFT JOIN Author [a] ON [a].Id = [ba].AuthorId
+                WHERE [b].Id = @Id 
 
-      --DECLARE @Id INT;
-      --      DECLARE @Name VARCHAR(MAX);
-      --      DECLARE @FieldTypeId INT;
-      --      DECLARE @IsActive BIT;
-      --      DECLARE @NewCustomFieldId INT;
-
-      --      DECLARE @CustomFieldCursor CURSOR;
-
-
-      --      SET @CustomFieldCursor = CURSOR FORWARD_ONLY
-      --      FOR SELECT * FROM @Fields;
-
-      --      OPEN @CustomFieldCursor;
-      --      FETCH NEXT FROM @CustomFieldCursor INTO @Id,
-      --                                              @Name,
-      --                                              @FieldTypeId,
-      --                                              @IsActive;
-      --WHILE @@FETCH_STATUS = 0
-      --  FETCH NEXT FROM @CustomFieldCursor INTO @Id,
-      --                                                      @Name,
-      --                                                      @FieldTypeId,
-      --                                                      @IsActive;
+                FETCH NEXT FROM @CustomCursor INTO @Id;
+            END
+    END

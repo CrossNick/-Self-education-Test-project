@@ -27,7 +27,7 @@ namespace BS.Data.Repositories
             };
 
 
-        public BookEM Create(BookEM book)
+        public BookCreateEM Create(BookCreateEM book)
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
@@ -36,29 +36,48 @@ namespace BS.Data.Repositories
                 sqlParams.Add("@ReleaseDate", book.ReleaseDate, DbType.Date);
                 sqlParams.Add("@Rating", book.Rating, DbType.Double);
                 sqlParams.Add("@PageCount", book.PageCount, DbType.Int32);
-                sqlParams.Add("@AuthorIds", book.AuthorsId.AuthorsAsDataTableParam().AsTableValuedParameter());
-                book.BookId = db.Query<int>(SP_INSERT_BOOK, book, null, true, null, CommandType.StoredProcedure).FirstOrDefault();
+                sqlParams.Add("@AuthorIds", book.Authors.AuthorsAsDataTableParam().AsTableValuedParameter("IntArray"));
+                book.BookId = db.Query<int>(SP_INSERT_BOOK, sqlParams, null, true, null, CommandType.StoredProcedure).FirstOrDefault();
             }
             return book;
+        }
+
+        public BookEM Create(BookEM entity)
+        {
+            throw new NotImplementedException();
         }
 
         public void Delete(int BookId)
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                db.Query(SP_DELETE_BOOK, BookId, null, true, null, CommandType.StoredProcedure);
+                DynamicParameters sqlParams = new DynamicParameters();
+                sqlParams.Add("@BookId", BookId, DbType.String);
+                db.Query(SP_DELETE_BOOK, sqlParams, null, true, null, CommandType.StoredProcedure);
             }
         }
 
         public IEnumerable<BookEM> Get()
         {
-            //IEnumerable<BookEM> result;
-            //using (IDbConnection db = new SqlConnection(connectionString))
-            //{
-            //    result = db.Query<BookEM>(SP_GET_BOOK, null,null,true,null,CommandType.StoredProcedure);
-            //}
-            return books;
+            IEnumerable<BookEM> result;
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                DynamicParameters sqlParams = new DynamicParameters();
+                sqlParams.Add("@BookId", null, DbType.String);
+                using (var multi = db.QueryMultiple(SP_GET_BOOK, sqlParams, null, null, CommandType.StoredProcedure))
+                {
+                    result = multi.Read<BookEM>();
+                    foreach(var book in result)
+                    {
+                        if(!multi.IsConsumed)
+                            book.Authors = multi.Read<AuthorEM>();
+                    }
+
+                }
+            }
+            return result;
         }
+
         public BookEM Get(int BookId)
         {
             BookEM result;

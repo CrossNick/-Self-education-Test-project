@@ -6,7 +6,7 @@
 					 [Rating]      FLOAT (53)    NULL,
 					 [PageCount]   INT           NULL
                      ); 
-
+SET IDENTITY_INSERT dbo.Book ON;  
 INSERT INTO @BooksToInsert
 VALUES
 		(1, 'Harry Potter and the Chamber of Secrets', convert(DATE, '02-07-1998'), 4.6, 251),
@@ -20,7 +20,7 @@ VALUES
 		(9, 'A Storm of Swords', convert(DATE, '01-01-2000'), 4.7, 973)
 
 INSERT INTO [dbo].[Book]
-SELECT [bi].Id,
+SELECT 
 		[bi].[Title],
 		[bi].[ReleaseDate],
 		[bi].[Rating],

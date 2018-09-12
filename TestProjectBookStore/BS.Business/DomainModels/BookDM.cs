@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BS.Business.ViewModels;
+using BS.Data.EntityModels;
 using BS.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -20,12 +21,16 @@ namespace BS.Business.DomainModels
             this.authorRepo = authorRepo;
         }
 
+        public void CreateBook(BookCreateVM book)
+        {
+            bookRepo.Create(Mapper.Map<BookCreateEM>(book));
+        }
+
         public IEnumerable<BookVM> GetBooks()
         {
             var result = Mapper.Map<IEnumerable<BookVM>>(bookRepo.Get());
             foreach(var book in result)
             {
-                book.Authors = Mapper.Map<IEnumerable<AuthorVM>>(authorRepo.GetAuthors(book.BookId));
                 book.Mode = "display";
             }
             return result;

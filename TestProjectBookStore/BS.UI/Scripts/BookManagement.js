@@ -69,6 +69,7 @@
             data: model
         }).done(function () {
             $('#create-book-modal').modal('hide');
+            getBooksAjax();
         });
     } 
 

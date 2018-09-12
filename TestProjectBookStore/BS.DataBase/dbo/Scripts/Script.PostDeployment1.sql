@@ -9,6 +9,6 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-:r .\Post-Deployment\1_Book_Insert.sql
-:r .\Post-Deployment\2_Author_Insert.sql
-:r .\Post-Deployment\3_BookAuthor_Insert.sql
+--:r .\Post-Deployment\1_Book_Insert.sql
+--:r .\Post-Deployment\2_Author_Insert.sql
+--:r .\Post-Deployment\3_BookAuthor_Insert.sql

@@ -22,6 +22,7 @@ namespace BS.Business
                 cfg.CreateMap<AuthorEM, Select2AuthorsVM>()
                     .ForMember(dest => dest.id, opt => opt.ResolveUsing(src => { return src.AuthorId; }))
                     .ForMember(dest => dest.text, opt => opt.ResolveUsing(src => { return src.FirstName + " " + src.LastName; }));
+                cfg.CreateMap<BookCreateEM, BookCreateEM>();
             });
         }
     }

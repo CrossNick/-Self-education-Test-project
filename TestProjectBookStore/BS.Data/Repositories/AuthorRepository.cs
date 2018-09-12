@@ -93,7 +93,7 @@ namespace BS.Data.Repositories
 
             return result;
 
-            throw new NotImplementedException();
+   
         }
     }
 }

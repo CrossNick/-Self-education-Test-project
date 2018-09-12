@@ -13,7 +13,7 @@ namespace BS.Data
         public static DataTable AuthorsAsDataTableParam(this IEnumerable<int> data)
         {
             var tableAsParam = new DataTable();
-            tableAsParam.Columns.Add("AuthorId");
+            tableAsParam.Columns.Add("Id");
 
             if (data != null)
             {

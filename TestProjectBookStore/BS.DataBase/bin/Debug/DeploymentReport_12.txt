@@ -1,0 +1,29 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       [dbo].[Author]
+       [dbo].[Book]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Table rebuild
+       [dbo].[Author] (Table)
+       [dbo].[Book] (Table)
+     Alter
+       [dbo].[USPBookInsert] (Procedure)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_BookAuthor_Author] (Foreign Key)
+       [dbo].[FK_BookAuthor_Book] (Foreign Key)
+     Create
+       [dbo].[FK_BookAuthor_Author] (Foreign Key)
+       [dbo].[FK_BookAuthor_Book] (Foreign Key)
+     Refresh
+       [dbo].[USPGetAuthor] (Procedure)
+       [dbo].[USPGetBook] (Procedure)
+       [dbo].[USPBookDelete] (Procedure)

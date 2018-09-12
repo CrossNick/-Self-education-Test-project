@@ -1,6 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[USPBookDelete]
-    @param1 int = 0,
-    @param2 int
+    @BookId int
 AS
-    SELECT @param1, @param2
+    DELETE FROM BookAuthor
+    WHERE BookId = @BookId
+
+    DELETE FROM Book
+    WHERE Id = @BookId
 RETURN 0

@@ -10,6 +10,8 @@ namespace BS.Business.DomainModels
     public interface IBookDM
     {
         IEnumerable<BookVM> GetBooks();
+        void CreateBook(BookCreateVM book);
        
     }
+
 }

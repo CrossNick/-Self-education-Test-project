@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Book] (
-    [Id]      INT           NOT NULL,
+    [Id]      INT        IDENTITY(1,1)   NOT NULL,
     [Title]       NVARCHAR (50) NOT NULL,
     [ReleaseDate] DATE          NULL,
     [Rating]      FLOAT (53)    NULL,

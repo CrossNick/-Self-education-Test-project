@@ -1,6 +1,20 @@
 ﻿CREATE PROCEDURE [dbo].[USPBookInsert]
-    @param1 int = 0,
-    @param2 int
+    @Title NVARCHAR (50),
+    @AuthorIds [dbo].IntArray READONLY,
+    @ReleaseDate DATE,
+    @Rating FLOAT (53),
+    @PageCount INT
+
 AS
-    SELECT @param1, @param2
-RETURN 0
+    INSERT
+    INTO Book
+    VALUES (@Title, @ReleaseDate, @Rating, @PageCount)
+
+    DECLARE @BookID INT = IDENT_CURRENT('Book');
+
+    INSERT
+    INTO BookAuthor (AuthorId, BookId)
+    SELECT [a].Id, @BookID
+    FROM @AuthorIds [a]
+
+RETURN @BookID
