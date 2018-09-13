@@ -27,6 +27,22 @@ namespace BS.Data.Repositories
             };
 
 
+        public int Edit(BookCreateEM book)
+        {
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                DynamicParameters sqlParams = new DynamicParameters();
+                sqlParams.Add("@Id", book.BookId, DbType.String);
+                sqlParams.Add("@Title", book.Title, DbType.String);
+                sqlParams.Add("@ReleaseDate", book.ReleaseDate, DbType.Date);
+                sqlParams.Add("@Rating", book.Rating, DbType.Double);
+                sqlParams.Add("@PageCount", book.PageCount, DbType.Int32);
+                sqlParams.Add("@AuthorIds", book.Authors.AuthorsAsDataTableParam().AsTableValuedParameter("IntArray"));
+                book.BookId = db.Query<int>(SP_UPDATE_BOOK, sqlParams, null, true, null, CommandType.StoredProcedure).FirstOrDefault();
+            }
+            return book.BookId;
+        }
+
         public BookCreateEM Create(BookCreateEM book)
         {
             using (IDbConnection db = new SqlConnection(connectionString))

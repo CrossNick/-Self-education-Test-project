@@ -10,5 +10,6 @@ namespace BS.Data.Repositories
     public interface IBookRepository : IRepository<BookEM>
     {
         BookCreateEM Create(BookCreateEM book);
+        int Edit(BookCreateEM book);
     }
 }

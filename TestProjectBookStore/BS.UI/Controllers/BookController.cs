@@ -26,13 +26,15 @@ namespace BS.UI.Controllers
 
         }
 
-        public JsonResult Edit(BookVM book)
+        public JsonResult Edit(BookCreateVM book)
         {
+            bookDM.EditBook(book);
             return Json(book.BookId);
         }
 
         public JsonResult Delete(BookVM book)
         {
+            bookDM.DeleteBook(book.BookId);
             return Json(book.BookId);
         }
 

@@ -26,6 +26,17 @@ namespace BS.Business.DomainModels
             bookRepo.Create(Mapper.Map<BookCreateEM>(book));
         }
 
+        public int EditBook(BookCreateVM book)
+        {
+            return bookRepo.Edit(Mapper.Map<BookCreateEM>(book));
+        }
+
+        public int DeleteBook(int bookId)
+        {
+            bookRepo.Delete(bookId);
+            return bookId;
+        }
+
         public IEnumerable<BookVM> GetBooks()
         {
             var result = Mapper.Map<IEnumerable<BookVM>>(bookRepo.Get());

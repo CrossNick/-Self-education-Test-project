@@ -11,7 +11,9 @@ namespace BS.Business.DomainModels
     {
         IEnumerable<BookVM> GetBooks();
         void CreateBook(BookCreateVM book);
-       
+        int DeleteBook(int bookId);
+        int EditBook(BookCreateVM book);
+
     }
 
 }
