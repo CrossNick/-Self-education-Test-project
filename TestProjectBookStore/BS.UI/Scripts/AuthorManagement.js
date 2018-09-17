@@ -37,6 +37,7 @@
             data: model
         }).done(function () {
             $('#create-author-modal').modal('hide');
+            getAuthorsAjax();
         });
     } 
 
@@ -49,6 +50,7 @@
             data: JSON.stringify(submitData)
         }).done(function (id) {
             currentData.AuthorId(id);
+            getAuthorsAjax();
         });
     }
 

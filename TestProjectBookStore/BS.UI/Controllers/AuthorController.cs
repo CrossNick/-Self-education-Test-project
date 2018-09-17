@@ -22,18 +22,19 @@ namespace BS.UI.Controllers
 
         public JsonResult Edit(AuthorVM author)
         {
+            authorDM.UpdateAuthor(author);
             return Json(author.AuthorId);
         }
 
         public JsonResult Delete(AuthorVM author)
         {
+            authorDM.DeleteAuthor(author);
             return Json(author.AuthorId);
         }
 
-        public void Create(AuthorVM book)
+        public void Create(AuthorVM author)
         {
-
-
+            authorDM.AddAuthor(author);
         }
     }
 }

@@ -17,4 +17,9 @@ AS
     SELECT [a].Id, @BookID
     FROM @AuthorIds [a]
 
+	UPDATE [a]
+	SET [a].BooksCount = [a].BooksCount + 1
+	FROM Author [a]
+	Inner JOIN @AuthorIds [ai] ON [a].Id = [ai].Id
+
 RETURN @BookID

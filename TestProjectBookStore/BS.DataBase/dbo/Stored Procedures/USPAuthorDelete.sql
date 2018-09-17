@@ -1,6 +1,10 @@
 ﻿CREATE PROCEDURE [dbo].[USPAuthorDelete]
-    @param1 int = 0,
-    @param2 int
+    @AuthorId int
 AS
-    SELECT @param1, @param2
-RETURN 0
+   DELETE 
+   FROM BookAuthor
+   WHERE AuthorId = @AuthorId
+
+   DELETE
+   FROM Author
+   WHERE Id = @AuthorId

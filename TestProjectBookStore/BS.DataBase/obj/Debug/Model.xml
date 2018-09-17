@@ -116,7 +116,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="4" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="5" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[Book]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -207,7 +207,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="5" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="6" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[BookAuthor]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -250,8 +250,8 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="6" />
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="7" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="8" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_BookAuthor_Author]">
 			<Relationship Name="Columns">
@@ -274,7 +274,7 @@
 					<References Name="[dbo].[Author]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="6" />
+			<AttachedAnnotation Disambiguator="7" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_BookAuthor_Book]">
 			<Relationship Name="Columns">
@@ -297,7 +297,7 @@
 					<References Name="[dbo].[Book]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="7" />
+			<AttachedAnnotation Disambiguator="8" />
 		</Element>
 		<Element Type="SqlTableType" Name="[dbo].[IntArray]">
 			<Relationship Name="Columns">
@@ -341,7 +341,7 @@
 					<References Name="[dbo].[Author]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="4" />
+			<AttachedAnnotation Disambiguator="5" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_Book]">
 			<Relationship Name="ColumnSpecifications">
@@ -360,44 +360,40 @@
 					<References Name="[dbo].[Book]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="5" />
+			<AttachedAnnotation Disambiguator="6" />
 		</Element>
 		<Element Type="SqlProcedure" Name="[dbo].[USPAuthorDelete]">
 			<Property Name="BodyScript">
 				<Value><![CDATA[
-    SELECT @param1, @param2
-RETURN 0]]></Value>
+   DELETE 
+   FROM BookAuthor
+   WHERE AuthorId = @AuthorId
+
+   DELETE
+   FROM Author
+   WHERE Id = @AuthorId]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
-					<References Name="[dbo].[USPAuthorDelete].[@param1]" />
+					<References Name="[dbo].[BookAuthor]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[USPAuthorDelete].[@param2]" />
+					<References Name="[dbo].[BookAuthor].[AuthorId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPAuthorDelete].[@AuthorId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[Id]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="Parameters">
 				<Entry>
-					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPAuthorDelete].[@param1]">
-						<Property Name="DefaultExpressionScript">
-							<Value><![CDATA[0]]></Value>
-						</Property>
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPAuthorDelete].[@param2]">
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPAuthorDelete].[@AuthorId]">
 						<Relationship Name="Type">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
@@ -418,39 +414,41 @@ RETURN 0]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="122" />
+				<Property Name="Length" Value="180" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPAuthorDelete]&#xD;&#xA;    @param1 int = 0,&#xD;&#xA;    @param2 int&#xD;&#xA;AS" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPAuthorDelete]&#xD;&#xA;    @AuthorId int&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="SqlProcedure" Name="[dbo].[USPAuthorInsert]">
 			<Property Name="BodyScript">
 				<Value><![CDATA[
-    SELECT @param1, @param2
-RETURN 0]]></Value>
+    INSERT
+    INTO Author
+    VALUES (@FirstName, @LastName, 0)]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
-					<References Name="[dbo].[USPAuthorInsert].[@param1]" />
+					<References Name="[dbo].[Author]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[USPAuthorInsert].[@param2]" />
+					<References Name="[dbo].[USPAuthorInsert].[@FirstName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPAuthorInsert].[@LastName]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="Parameters">
 				<Entry>
-					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPAuthorInsert].[@param1]">
-						<Property Name="DefaultExpressionScript">
-							<Value><![CDATA[0]]></Value>
-						</Property>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPAuthorInsert].[@FirstName]">
 						<Relationship Name="Type">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="50" />
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -459,13 +457,14 @@ RETURN 0]]></Value>
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPAuthorInsert].[@param2]">
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPAuthorInsert].[@LastName]">
 						<Relationship Name="Type">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="50" />
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -480,82 +479,40 @@ RETURN 0]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="122" />
+				<Property Name="Length" Value="174" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPAuthorInsert]&#xD;&#xA;    @param1 int = 0,&#xD;&#xA;    @param2 int&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="SqlProcedure" Name="[dbo].[USPBookAuthorInsert]">
-			<Property Name="BodyScript">
-				<Value><![CDATA[
-    SELECT @param1, @param2
-RETURN 0]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[USPBookAuthorInsert].[@param1]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[USPBookAuthorInsert].[@param2]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Parameters">
-				<Entry>
-					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPBookAuthorInsert].[@param1]">
-						<Property Name="DefaultExpressionScript">
-							<Value><![CDATA[0]]></Value>
-						</Property>
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPBookAuthorInsert].[@param2]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="Schema">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="126" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPBookAuthorInsert]&#xD;&#xA;    @param1 int = 0,&#xD;&#xA;    @param2 int&#xD;&#xA;AS" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPAuthorInsert]&#xD;&#xA;    @FirstName  NVARCHAR (50),&#xD;&#xA;    @LastName  NVARCHAR (50)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="SqlProcedure" Name="[dbo].[USPBookDelete]">
 			<Property Name="BodyScript">
 				<Value><![CDATA[
-    DELETE FROM BookAuthor
+    
+
+   
+
+
+	DECLARE @RemovedAuthorsId TABLE (
+		Id INT
+	);
+
+	INSERT INTO @RemovedAuthorsId
+	SELECT AuthorId AS Id
+	FROM BookAuthor
+	WHERE BookId = @BookId
+
+	UPDATE [a]
+	SET [a].BooksCount = BooksCount-1
+	FROM Author [a]
+	INNER JOIN @RemovedAuthorsId [ra] ON [ra].Id = [a].Id 
+
+	DELETE FROM BookAuthor
     WHERE BookId = @BookId
 
-    DELETE FROM Book
+	 DELETE FROM Book
     WHERE Id = @BookId
+
 RETURN 0]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -564,16 +521,57 @@ RETURN 0]]></Value>
 					<References Name="[dbo].[BookAuthor]" />
 				</Entry>
 				<Entry>
+					<References Name="[dbo].[BookAuthor].[AuthorId]" />
+				</Entry>
+				<Entry>
 					<References Name="[dbo].[BookAuthor].[BookId]" />
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[USPBookDelete].[@BookId]" />
 				</Entry>
 				<Entry>
+					<References Name="[dbo].[Author]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPBookDelete].[@RemovedAuthorsId].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[BooksCount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[BooksCount]" />
+				</Entry>
+				<Entry>
 					<References Name="[dbo].[Book]" />
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[Book].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DynamicObjects">
+				<Entry>
+					<Element Type="SqlDynamicColumnSource" Name="[dbo].[USPBookDelete].[@RemovedAuthorsId]">
+						<Relationship Name="Columns">
+							<Entry>
+								<Element Type="SqlSimpleColumn" Name="[dbo].[USPBookDelete].[@RemovedAuthorsId].[Id]">
+									<Relationship Name="TypeSpecifier">
+										<Entry>
+											<Element Type="SqlTypeSpecifier">
+												<Relationship Name="Type">
+													<Entry>
+														<References ExternalSource="BuiltIns" Name="[int]" />
+													</Entry>
+												</Relationship>
+											</Element>
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
 				</Entry>
 			</Relationship>
 			<Relationship Name="Parameters">
@@ -599,7 +597,7 @@ RETURN 0]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="173" />
+				<Property Name="Length" Value="467" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPBookDelete]&#xD;&#xA;    @BookId int&#xD;&#xA;AS" />
@@ -618,6 +616,11 @@ RETURN 0]]></Value>
     INTO BookAuthor (AuthorId, BookId)
     SELECT [a].Id, @BookID
     FROM @AuthorIds [a]
+
+	UPDATE [a]
+	SET [a].BooksCount = [a].BooksCount + 1
+	FROM Author [a]
+	Inner JOIN @AuthorIds [ai] ON [a].Id = [ai].Id
 
 RETURN @BookID]]></Value>
 			</Property>
@@ -655,6 +658,21 @@ RETURN @BookID]]></Value>
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[USPBookInsert].[@AuthorIds].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPBookInsert].[@AuthorIds].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[BooksCount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[BooksCount]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="DynamicObjects">
@@ -766,7 +784,7 @@ RETURN @BookID]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="441" />
+				<Property Name="Length" Value="565" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPBookInsert]&#xD;&#xA;    @Title NVARCHAR (50),&#xD;&#xA;    @AuthorIds [dbo].IntArray READONLY,&#xD;&#xA;    @ReleaseDate DATE,&#xD;&#xA;    @Rating FLOAT (53),&#xD;&#xA;    @PageCount INT&#xD;&#xA;&#xD;&#xA;AS" />
@@ -946,24 +964,37 @@ RETURN @BookID]]></Value>
 		<Element Type="SqlProcedure" Name="[dbo].[USPUpdateAuthor]">
 			<Property Name="BodyScript">
 				<Value><![CDATA[
-    SELECT @param1, @param2
-RETURN 0]]></Value>
+    UPDATE Author
+	SET FirstName = @FirstName, LastName = @LastName
+	WHERE Id = @AuthorId]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
-					<References Name="[dbo].[USPUpdateAuthor].[@param1]" />
+					<References Name="[dbo].[Author]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[USPUpdateAuthor].[@param2]" />
+					<References Name="[dbo].[Author].[FirstName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPUpdateAuthor].[@FirstName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[LastName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPUpdateAuthor].[@LastName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPUpdateAuthor].[@AuthorId]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="Parameters">
 				<Entry>
-					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPUpdateAuthor].[@param1]">
-						<Property Name="DefaultExpressionScript">
-							<Value><![CDATA[0]]></Value>
-						</Property>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPUpdateAuthor].[@AuthorId]">
 						<Relationship Name="Type">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
@@ -978,13 +1009,30 @@ RETURN 0]]></Value>
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPUpdateAuthor].[@param2]">
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPUpdateAuthor].[@FirstName]">
 						<Relationship Name="Type">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="50" />
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPUpdateAuthor].[@LastName]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -999,33 +1047,176 @@ RETURN 0]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="122" />
+				<Property Name="Length" Value="212" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPUpdateAuthor]&#xD;&#xA;    @param1 int = 0,&#xD;&#xA;    @param2 int&#xD;&#xA;AS" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPUpdateAuthor]&#xD;&#xA;    @AuthorId int,&#xD;&#xA;    @FirstName nvarchar(50),&#xD;&#xA;&#x9;@LastName nvarchar(50)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="SqlProcedure" Name="[dbo].[USPUpdateBook]">
 			<Property Name="BodyScript">
 				<Value><![CDATA[
-    SELECT @param1, @param2
-RETURN 0]]></Value>
+	--Remove current authors
+	DECLARE @RemovedAuthorsId TABLE (
+		Id INT
+	);
+
+	INSERT INTO @RemovedAuthorsId
+	SELECT AuthorId AS Id
+	FROM BookAuthor
+	WHERE BookId = @Id
+
+	DELETE
+    FROM BookAuthor
+    WHERE BookId = @Id
+
+	--Reduce current authors book counts
+	UPDATE [a]
+	SET [a].BooksCount = BooksCount-1
+	FROM Author [a]
+	INNER JOIN @RemovedAuthorsId [ra] ON [ra].Id = [a].Id 
+
+	--Update book
+    UPDATE Book
+    SET Title = @Title, ReleaseDate = @ReleaseDate, Rating = @Rating, PageCount = @PageCount
+    WHERE Id =  @Id
+
+   
+    --Insert New Authors and increase their BooksCount
+    INSERT
+    INTO BookAuthor (AuthorId, BookId)
+    SELECT [a].Id, @Id
+    FROM @AuthorIds [a]
+
+	UPDATE [a]
+	SET [a].BooksCount = [a].BooksCount + 1
+	FROM Author [a]
+	Inner JOIN @AuthorIds [ai] ON [a].Id = [ai].Id
+
+RETURN @Id]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
-					<References Name="[dbo].[USPUpdateBook].[@param1]" />
+					<References Name="[dbo].[BookAuthor]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[USPUpdateBook].[@param2]" />
+					<References Name="[dbo].[BookAuthor].[AuthorId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[BookAuthor].[BookId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPUpdateBook].[@Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPUpdateBook].[@RemovedAuthorsId].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[BooksCount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[BooksCount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Book]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Book].[Title]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPUpdateBook].[@Title]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Book].[ReleaseDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPUpdateBook].[@ReleaseDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Book].[Rating]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPUpdateBook].[@Rating]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Book].[PageCount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPUpdateBook].[@PageCount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Book].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPUpdateBook].[@AuthorIds]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPUpdateBook].[@AuthorIds].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPUpdateBook].[@AuthorIds].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[BooksCount]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DynamicObjects">
+				<Entry>
+					<Element Type="SqlDynamicColumnSource" Name="[dbo].[USPUpdateBook].[@RemovedAuthorsId]">
+						<Relationship Name="Columns">
+							<Entry>
+								<Element Type="SqlSimpleColumn" Name="[dbo].[USPUpdateBook].[@RemovedAuthorsId].[Id]">
+									<Relationship Name="TypeSpecifier">
+										<Entry>
+											<Element Type="SqlTypeSpecifier">
+												<Relationship Name="Type">
+													<Entry>
+														<References ExternalSource="BuiltIns" Name="[int]" />
+													</Entry>
+												</Relationship>
+											</Element>
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlDynamicColumnSource" Name="[dbo].[USPUpdateBook].[@AuthorIds]" Disambiguator="4">
+						<Relationship Name="Columns">
+							<Entry>
+								<Element Type="SqlSimpleColumn" Name="[dbo].[USPUpdateBook].[@AuthorIds].[Id]">
+									<Relationship Name="TypeSpecifier">
+										<Entry>
+											<Element Type="SqlTypeSpecifier">
+												<Relationship Name="Type">
+													<Entry>
+														<References ExternalSource="BuiltIns" Name="[int]" />
+													</Entry>
+												</Relationship>
+											</Element>
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
 				</Entry>
 			</Relationship>
 			<Relationship Name="Parameters">
 				<Entry>
-					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPUpdateBook].[@param1]">
-						<Property Name="DefaultExpressionScript">
-							<Value><![CDATA[0]]></Value>
-						</Property>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPUpdateBook].[@Id]">
 						<Relationship Name="Type">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
@@ -1040,7 +1231,70 @@ RETURN 0]]></Value>
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPUpdateBook].[@param2]">
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPUpdateBook].[@Title]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPUpdateBook].[@AuthorIds]">
+						<Property Name="IsReadOnly" Value="True" />
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References Name="[dbo].[IntArray]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPUpdateBook].[@ReleaseDate]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[date]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPUpdateBook].[@Rating]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Precision" Value="53" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[float]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPUpdateBook].[@PageCount]">
 						<Relationship Name="Type">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
@@ -1061,10 +1315,10 @@ RETURN 0]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="120" />
+				<Property Name="Length" Value="1043" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPUpdateBook]&#xD;&#xA;    @param1 int = 0,&#xD;&#xA;    @param2 int&#xD;&#xA;AS" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPUpdateBook]&#xD;&#xA;    @Id INT,&#xD;&#xA;    @Title NVARCHAR (50),&#xD;&#xA;    @AuthorIds [dbo].IntArray READONLY,&#xD;&#xA;    @ReleaseDate DATE,&#xD;&#xA;    @Rating FLOAT (53),&#xD;&#xA;    @PageCount INT&#xD;&#xA;&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 	</Model>

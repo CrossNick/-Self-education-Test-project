@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[USPAuthorInsert]
-    @param1 int = 0,
-    @param2 int
+    @FirstName  NVARCHAR (50),
+    @LastName  NVARCHAR (50)
 AS
-    SELECT @param1, @param2
-RETURN 0
+    INSERT
+    INTO Author
+    VALUES (@FirstName, @LastName, 0)

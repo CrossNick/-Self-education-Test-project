@@ -37,9 +37,20 @@ namespace BS.Business.DomainModels
 
         public AuthorVM AddAuthor(AuthorVM author)
         {
-            var param = Mapper.Map<AuthorEM>(author);
-            repo.Create(param);
-            return author;
+            var result = repo.Create(Mapper.Map<AuthorEM>(author));
+            return Mapper.Map<AuthorVM>(result);
+        }
+
+        public int UpdateAuthor(AuthorVM author)
+        {
+            repo.Update(Mapper.Map<AuthorEM>(author));
+            return author.AuthorId;
+        }
+
+        public int DeleteAuthor(AuthorVM author)
+        {
+            repo.Delete(author.AuthorId);
+            return author.AuthorId;
         }
 
     }

@@ -20,11 +20,7 @@ namespace BS.Data.Repositories
         private const string SP_UPDATE_BOOK = "USPUpdateBook";
         private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
-        private List<BookEM> books = new List<BookEM>(){
-                new BookEM(){BookId=1, Title="Book 1", ReleaseDate=new DateTime(2010,1,1), Rating=10, PageCount=300},
-                new BookEM(){BookId=2, Title="Book 2", ReleaseDate=new DateTime(2010,2,2), Rating=5, PageCount=500},
-                new BookEM(){BookId=3, Title="Book 3", ReleaseDate=new DateTime(2010,3,3), Rating=8, PageCount=600}
-            };
+      
 
 
         public int Edit(BookCreateEM book)
@@ -68,7 +64,7 @@ namespace BS.Data.Repositories
             using (IDbConnection db = new SqlConnection(connectionString))
             {
                 DynamicParameters sqlParams = new DynamicParameters();
-                sqlParams.Add("@BookId", BookId, DbType.String);
+                sqlParams.Add("@BookId", BookId, DbType.Int32);
                 db.Query(SP_DELETE_BOOK, sqlParams, null, true, null, CommandType.StoredProcedure);
             }
         }
@@ -79,7 +75,7 @@ namespace BS.Data.Repositories
             using (IDbConnection db = new SqlConnection(connectionString))
             {
                 DynamicParameters sqlParams = new DynamicParameters();
-                sqlParams.Add("@BookId", null, DbType.String);
+                sqlParams.Add("@BookId", null, DbType.Int32);
                 using (var multi = db.QueryMultiple(SP_GET_BOOK, sqlParams, null, null, CommandType.StoredProcedure))
                 {
                     result = multi.Read<BookEM>();
@@ -99,7 +95,9 @@ namespace BS.Data.Repositories
             BookEM result;
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                result = db.Query<BookEM>(SP_GET_BOOK, BookId, null, true, null, CommandType.StoredProcedure).FirstOrDefault();
+                DynamicParameters sqlParams = new DynamicParameters();
+                sqlParams.Add("@BookId", BookId, DbType.Int32);
+                result = db.Query<BookEM>(SP_GET_BOOK, sqlParams, null, true, null, CommandType.StoredProcedure).FirstOrDefault();
             }
             return result;
         }

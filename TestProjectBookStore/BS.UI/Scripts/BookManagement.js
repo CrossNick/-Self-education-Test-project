@@ -46,6 +46,7 @@
             data: JSON.stringify(submitData)
         }).done(function (id) {
             currentData.BookId(id);
+            getBooksAjax();
         });
     }
 

@@ -19,19 +19,15 @@ namespace BS.Data.Repositories
         private const string SP_UPDATE_AUTHOR = "USPUpdateAuthor";
         private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
-        List<AuthorEM> authors = new List<AuthorEM>(){
-                new AuthorEM(){AuthorId=1, FirstName="John", LastName="Smith", BooksCount=2},
-                new AuthorEM(){AuthorId=2, FirstName="James", LastName="Mitch", BooksCount=3},
-                new AuthorEM(){AuthorId=3, FirstName="Joe", LastName="Truth", BooksCount=2}
-            };
-
         public AuthorEM Create(AuthorEM author)
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                author.AuthorId = db.Query<int>(SP_INSERT_AUTHOR, author, null, true, null, CommandType.StoredProcedure).FirstOrDefault();
+                DynamicParameters sqlParams = new DynamicParameters();
+                sqlParams.Add("@FirstName", author.FirstName, DbType.String);
+                sqlParams.Add("@LastName", author.LastName, DbType.String);
+                author.AuthorId = db.Query<int>(SP_INSERT_AUTHOR, sqlParams, null, true, null, CommandType.StoredProcedure).FirstOrDefault();
             }
-            authors.Add(author);
             return author;
         }
 
@@ -39,7 +35,9 @@ namespace BS.Data.Repositories
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                db.Query(SP_DELETE_AUTHOR, AuthorId, null, true, null, CommandType.StoredProcedure);
+                DynamicParameters sqlParams = new DynamicParameters();
+                sqlParams.Add("@AuthorId", AuthorId, DbType.Int32);
+                db.Query(SP_DELETE_AUTHOR, sqlParams, null, true, null, CommandType.StoredProcedure);
             }
         }
 
@@ -57,43 +55,23 @@ namespace BS.Data.Repositories
             AuthorEM result;
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                result = db.Query<AuthorEM>(SP_GET_AUTHOR, AuthorId, null, true, null, CommandType.StoredProcedure).FirstOrDefault();
+                DynamicParameters sqlParams = new DynamicParameters();
+                sqlParams.Add("@AuthorId", AuthorId, DbType.Int32);
+                result = db.Query<AuthorEM>(SP_GET_AUTHOR, sqlParams, null, true, null, CommandType.StoredProcedure).FirstOrDefault();
             }
             return result;
         }
 
-        public void Update(AuthorEM entity)
+        public void Update(AuthorEM author)
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                db.Query(SP_UPDATE_AUTHOR, entity, null, true, null, CommandType.StoredProcedure);
+                DynamicParameters sqlParams = new DynamicParameters();
+                sqlParams.Add("@AuthorId", author.AuthorId, DbType.Int32);
+                sqlParams.Add("@FirstName", author.FirstName, DbType.String);
+                sqlParams.Add("@LastName", author.LastName, DbType.String);
+                db.Query(SP_UPDATE_AUTHOR, sqlParams, null, true, null, CommandType.StoredProcedure);
             }
-        }
-
-        public IEnumerable<AuthorEM> GetAuthors(int bookId)
-        {
-            IEnumerable<AuthorEM> result;
-           
-            if (bookId == 1)
-                result = new List<AuthorEM>(){
-                new AuthorEM(){AuthorId=1, FirstName="John", LastName="Smith", BooksCount=2},
-                new AuthorEM(){AuthorId=2, FirstName="James", LastName="Mitch", BooksCount=3}
-                };
-            else if(bookId == 2)
-                result = new List<AuthorEM>(){
-                new AuthorEM(){AuthorId=2, FirstName="James", LastName="Mitch", BooksCount=3},
-                new AuthorEM(){AuthorId=2, FirstName="Joe", LastName="Truth", BooksCount=2}
-                };
-            else
-                result = new List<AuthorEM>(){
-                new AuthorEM(){AuthorId=1, FirstName="John", LastName="Smith", BooksCount=2},
-                new AuthorEM(){AuthorId=2, FirstName="James", LastName="Mitch", BooksCount=3},
-                new AuthorEM(){AuthorId=2, FirstName="Joe", LastName="Truth", BooksCount=2}
-                };
-
-            return result;
-
-   
         }
     }
 }

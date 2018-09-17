@@ -12,5 +12,7 @@ namespace BS.Business.DomainModels
         IEnumerable<AuthorVM> GetAuthors();
         IEnumerable<Select2AuthorsVM> GetAuthorsSelect2();
         AuthorVM AddAuthor(AuthorVM author);
+        int UpdateAuthor(AuthorVM author);
+        int DeleteAuthor(AuthorVM author);
     }
 }
