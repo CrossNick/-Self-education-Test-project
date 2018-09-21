@@ -7,41 +7,72 @@
     @PageCount INT
 
 AS
-	--Remove current authors
-	DECLARE @RemovedAuthorsId TABLE (
-		Id INT
-	);
+	DECLARE @Transaction NVARCHAR(MAX) = 'USPUodateBook transaction';
 
-	INSERT INTO @RemovedAuthorsId
-	SELECT AuthorId AS Id
-	FROM BookAuthor
-	WHERE BookId = @Id
+	BEGIN TRANSACTION @Transaction;
 
-	DELETE
-    FROM BookAuthor
-    WHERE BookId = @Id
+	BEGIN TRY
+		--Remove current authors
+		DECLARE @RemovedAuthorsId TABLE (
+			Id INT
+		);
 
-	--Reduce current authors book counts
-	UPDATE [a]
-	SET [a].BooksCount = BooksCount-1
-	FROM Author [a]
-	INNER JOIN @RemovedAuthorsId [ra] ON [ra].Id = [a].Id 
+		INSERT INTO @RemovedAuthorsId (Id)
+		SELECT AuthorId AS Id
+		FROM BookAuthor
+		WHERE BookId = @Id
 
-	--Update book
-    UPDATE Book
-    SET Title = @Title, ReleaseDate = @ReleaseDate, Rating = @Rating, PageCount = @PageCount
-    WHERE Id =  @Id
+		DELETE
+		FROM BookAuthor
+		WHERE BookId = @Id
+
+		--Reduce current authors book counts
+		UPDATE [a]
+		SET [a].BooksCount = BooksCount-1
+		FROM Author [a]
+		INNER JOIN @RemovedAuthorsId [ra] ON [ra].Id = [a].Id 
+
+		--Update book
+		UPDATE Book
+		SET Title = @Title, ReleaseDate = @ReleaseDate, Rating = @Rating, PageCount = @PageCount
+		WHERE Id =  @Id
 
    
-    --Insert New Authors and increase their BooksCount
-    INSERT
-    INTO BookAuthor (AuthorId, BookId)
-    SELECT [a].Id, @Id
-    FROM @AuthorIds [a]
+		--Insert New Authors and increase their BooksCount
+		INSERT
+		INTO BookAuthor (AuthorId, BookId)
+		SELECT [a].Id, @Id
+		FROM @AuthorIds [a]
 
-	UPDATE [a]
-	SET [a].BooksCount = [a].BooksCount + 1
-	FROM Author [a]
-	Inner JOIN @AuthorIds [ai] ON [a].Id = [ai].Id
+		UPDATE [a]
+		SET [a].BooksCount = [a].BooksCount + 1
+		FROM Author [a]
+		Inner JOIN @AuthorIds [ai] ON [a].Id = [ai].Id
 
-RETURN @Id
+		RETURN @Id
+	END TRY
+	BEGIN CATCH
+		IF @@TRANCOUNT > 0
+			BEGIN
+				ROLLBACK TRANSACTION @Transaction;
+			END;
+		DECLARE @ErrMessage   NVARCHAR(4000),
+				@ErrNumber    INT,
+				@ErrSeverity  INT,
+				@ErrState     INT,
+				@ErrLine      INT,
+				@ErrProcedure NVARCHAR(200);
+		SELECT @ErrNumber = ERROR_NUMBER()
+			  ,@ErrSeverity = ERROR_SEVERITY()
+			  ,@ErrState = ERROR_STATE()
+			  ,@ErrLine = ERROR_LINE()
+			  ,@ErrProcedure = ISNULL(ERROR_PROCEDURE(),'-');
+		SELECT @ErrMessage = N'Error %d, Level %d, State %d, Procedure %s, Line %d, '+'Message: '+ERROR_MESSAGE();
+		SELECT-1 AS [Result];
+		RAISERROR(@ErrMessage,@ErrSeverity,1,@ErrNumber,@ErrSeverity,@ErrState,@ErrProcedure,@ErrLine);
+	END CATCH;
+
+	IF @@TRANCOUNT > 0
+		BEGIN
+			COMMIT TRANSACTION @Transaction;
+		END;

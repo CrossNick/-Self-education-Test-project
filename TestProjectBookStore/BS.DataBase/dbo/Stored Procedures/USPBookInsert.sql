@@ -6,20 +6,59 @@
     @PageCount INT
 
 AS
-    INSERT
-    INTO Book
-    VALUES (@Title, @ReleaseDate, @Rating, @PageCount)
+	
+	DECLARE @Transaction NVARCHAR(MAX) = 'USPBookInsert transaction';
 
-    DECLARE @BookID INT = IDENT_CURRENT('Book');
+	BEGIN TRANSACTION @Transaction;
 
-    INSERT
-    INTO BookAuthor (AuthorId, BookId)
-    SELECT [a].Id, @BookID
-    FROM @AuthorIds [a]
+	BEGIN TRY
+		-- Understand ordering commands in SELECT
+		-- Group BY and HAVING
+		-- Stored procedures msdn 
+		--sql excersizes 
+		INSERT
+		INTO Book (Title, ReleaseDate, Rating, PageCount)
+		VALUES (@Title, @ReleaseDate, @Rating, @PageCount)
 
-	UPDATE [a]
-	SET [a].BooksCount = [a].BooksCount + 1
-	FROM Author [a]
-	Inner JOIN @AuthorIds [ai] ON [a].Id = [ai].Id
+		DECLARE @BookID INT = IDENT_CURRENT('Book');
 
-RETURN @BookID
+		INSERT
+		INTO BookAuthor (AuthorId, BookId)
+		SELECT [a].Id, @BookID
+		FROM @AuthorIds [a]
+
+		UPDATE [a]
+		SET [a].BooksCount = [a].BooksCount + 1
+		FROM Author [a]
+			JOIN @AuthorIds [ai] ON [a].Id = [ai].Id
+
+		RETURN @BookID
+	END TRY
+	BEGIN CATCH
+		IF @@TRANCOUNT > 0
+			BEGIN
+				ROLLBACK TRANSACTION @Transaction;
+			END;
+		DECLARE @ErrMessage   NVARCHAR(4000),
+				@ErrNumber    INT,
+				@ErrSeverity  INT,
+				@ErrState     INT,
+				@ErrLine      INT,
+				@ErrProcedure NVARCHAR(200);
+		SELECT @ErrNumber = ERROR_NUMBER()
+			  ,@ErrSeverity = ERROR_SEVERITY()
+			  ,@ErrState = ERROR_STATE()
+			  ,@ErrLine = ERROR_LINE()
+			  ,@ErrProcedure = ISNULL(ERROR_PROCEDURE(),'-');
+		SELECT @ErrMessage = N'Error %d, Level %d, State %d, Procedure %s, Line %d, '+'Message: '+ERROR_MESSAGE();
+		SELECT-1 AS [Result];
+		RAISERROR(@ErrMessage,@ErrSeverity,1,@ErrNumber,@ErrSeverity,@ErrState,@ErrProcedure,@ErrLine);
+	END CATCH;
+
+	IF @@TRANCOUNT > 0
+		BEGIN
+			COMMIT TRANSACTION @Transaction;
+		END;
+-- SELECT Col1
+-- FROM Test
+-- GROUP BY Col1
