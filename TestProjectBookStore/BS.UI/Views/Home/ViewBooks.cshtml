@@ -13,7 +13,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-lg-10 col-md-10 col-sm-10">
-            <table class="table">
+            <table id="book-table" class="table">
                 <thead id="tablehead">
                     <tr>
                         <th scope="col">Title</th>
@@ -61,8 +61,10 @@
 </script>
 <script>
     $(document).ready(function () {
+        
         BookManagement.Initialize();
-    });
+        $('#book-table').DataTable();
+    })
     $(document).on("click", ".kout-edit", null, function (ev) {
         var current = ko.dataFor(this);
         current.Mode("edit");

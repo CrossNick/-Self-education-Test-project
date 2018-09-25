@@ -12,7 +12,7 @@
 </div>
 <div class="row justify-content-center">
     <div class="col-lg-10 col-md-10 col-sm-10">
-        <table class="table">
+        <table id="author-table" class="table">
             <thead id="tablehead">
                 <tr>
                     <th scope="col">FirstName</th>
@@ -50,6 +50,9 @@
 <script>
     $(document).ready(function () {
         AuthorManagement.Initialize();
+        $('#author-table').DataTable({
+            responsive: true
+        });
     });
     $(document).on("click", ".kout-edit", null, function (ev) {
         var current = ko.dataFor(this);
