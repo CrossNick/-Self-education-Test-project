@@ -15,7 +15,7 @@ AS
 		-- Understand ordering commands in SELECT
 		-- Group BY and HAVING
 		-- Stored procedures msdn 
-		--sql excersizes 
+		-- sql excersizes 
 		INSERT
 		INTO Book (Title, ReleaseDate, Rating, PageCount)
 		VALUES (@Title, @ReleaseDate, @Rating, @PageCount)
@@ -59,6 +59,3 @@ AS
 		BEGIN
 			COMMIT TRANSACTION @Transaction;
 		END;
--- SELECT Col1
--- FROM Test
--- GROUP BY Col1

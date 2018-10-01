@@ -31,7 +31,8 @@ namespace BS.UI
             bundles.Add(new ScriptBundle("~/bundles/actions").Include(
                       "~/Scripts/Actions.js",
                        "~/Scripts/BookManagement.js",
-                       "~/Scripts/AuthorManagement.js"
+                       "~/Scripts/AuthorManagement.js",
+                       "~/Scripts/KOCustomBindings.js"
                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

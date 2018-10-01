@@ -35,3 +35,13 @@ textarea {
 .select2 {
     width: 100%;
 }
+
+th,
+td {
+    white-space: nowrap;
+}
+
+div.dataTables_wrapper {
+    width: 600px;
+    margin: 0 auto;
+}

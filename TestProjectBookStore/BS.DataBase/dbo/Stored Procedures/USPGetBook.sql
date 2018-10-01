@@ -17,6 +17,9 @@ AS
         OPEN @CustomCursor 
         FETCH NEXT FROM @CustomCursor INTO @Id;
 
+        SELECT Group, SUM(Count)
+        FROM table
+        Group by Group
 
         WHILE @@FETCH_STATUS = 0
             BEGIN

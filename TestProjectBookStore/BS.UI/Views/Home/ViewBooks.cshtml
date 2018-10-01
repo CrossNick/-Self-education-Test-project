@@ -24,7 +24,13 @@
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
-                <tbody id="tablebody" data-bind="foreach: books">
+                <tbody id="tablebody" data-bind="dataTablesForEach : {
+			data: books,
+			options: { 
+				deferRender: true,
+				paging: true
+			}
+		}">
                     <tr data-bind="template: { name: Mode, data: $data }"></tr>
                 </tbody>
             </table>
@@ -63,7 +69,6 @@
     $(document).ready(function () {
         
         BookManagement.Initialize();
-        $('#book-table').DataTable();
     })
     $(document).on("click", ".kout-edit", null, function (ev) {
         var current = ko.dataFor(this);

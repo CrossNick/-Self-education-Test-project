@@ -21,7 +21,13 @@
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
-            <tbody id="tablebody" data-bind="foreach: authors">
+            <tbody id="tablebody" data-bind="dataTablesForEach : {
+			data: authors,
+			options: { 
+				deferRender: true,
+				paging: true
+			}
+		}">
                 <tr data-bind="template: { name: Mode, data: $data }"></tr>
             </tbody>
         </table>
@@ -50,9 +56,6 @@
 <script>
     $(document).ready(function () {
         AuthorManagement.Initialize();
-        $('#author-table').DataTable({
-            responsive: true
-        });
     });
     $(document).on("click", ".kout-edit", null, function (ev) {
         var current = ko.dataFor(this);
