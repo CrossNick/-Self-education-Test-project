@@ -29,3 +29,6 @@ TestProjectBookStore/BS.UI/obj/Debug/BS.UI.csproj.FileListAbsolute.txt
 TestProjectBookStore/BS.UI/obj/Debug/BS.UI.csprojAssemblyReference.cache
 TestProjectBookStore/BS.UI/obj/Debug/BS.UI.dll
 TestProjectBookStore/BS.UI/obj/Debug/BS.UI.pdb
+*.jfm
+TestProjectBookStore/BS.DataBase/BS.DataBase.jfm
+TestProjectBookStore/BS.DataBase/BS.DataBase.dbmdl
