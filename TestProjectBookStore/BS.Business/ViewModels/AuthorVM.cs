@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BS.Business.ViewModels
 {
-    public class AuthorVM
+    public class AuthorVM : DataTableInfoVM
     {
         public int AuthorId { get; set; }
         public string FirstName { get; set; }

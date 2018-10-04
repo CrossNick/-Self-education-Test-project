@@ -81,6 +81,9 @@
     <Compile Include="UnityInitializer.cs" />
     <Compile Include="ViewModels\AuthorVM.cs" />
     <Compile Include="ViewModels\BookVM.cs" />
+    <Compile Include="ViewModels\ColumnVM.cs" />
+    <Compile Include="ViewModels\DataTableInfoVM.cs" />
+    <Compile Include="ViewModels\OrderVM.cs" />
     <Compile Include="ViewModels\Select2AuthorsVM.cs" />
   </ItemGroup>
   <ItemGroup>

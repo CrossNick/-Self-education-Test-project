@@ -1,61 +1,5 @@
 ﻿var AuthorManagement = AuthorManagement || {};
-ko.bindingHandlers.dataTablesForEach = {
-    page: 0,
-    init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-        var binding = ko.utils.unwrapObservable(valueAccessor());
 
-        ko.unwrap(binding.data);
-
-        if (binding.options.paging) {
-            binding.data.subscribe(function (changes) {
-                var table = $(element).closest('table').DataTable();
-                ko.bindingHandlers.dataTablesForEach.page = table.page();
-                table.destroy();
-            }, null, 'arrayChange');
-        }
-
-        var nodes = Array.prototype.slice.call(element.childNodes, 0);
-        ko.utils.arrayForEach(nodes, function (node) {
-            if (node && node.nodeType !== 1) {
-                node.parentNode.removeChild(node);
-            }
-        });
-
-        return ko.bindingHandlers.foreach.init(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext);
-    },
-    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-        var binding = ko.utils.unwrapObservable(valueAccessor()),
-            key = 'DataTablesForEach_Initialized';
-
-        ko.unwrap(binding.data);
-
-        var table;
-        if (!binding.options.paging) {
-            table = $(element).closest('table').DataTable();
-            table.destroy();
-        }
-
-        ko.bindingHandlers.foreach.update(element, valueAccessor, allBindings, viewModel, bindingContext);
-
-        table = $(element).closest('table').DataTable(binding.options);
-
-        if (binding.options.paging) {
-            if (table.page.info().pages - ko.bindingHandlers.dataTablesForEach.page === 0) {
-                table.page(--ko.bindingHandlers.dataTablesForEach.page).draw(false);
-            } else {
-                table.page(ko.bindingHandlers.dataTablesForEach.page).draw(false);
-            }
-        }
-
-        if (!ko.utils.domData.get(element, key) && (binding.data || binding.length)) {
-            ko.utils.domData.set(element, key, true);
-        }
-
-        return {
-            controlsDescendantBindings: true
-        };
-    }
-};
 (function () {
     var self = this;
 
@@ -126,6 +70,45 @@ ko.bindingHandlers.dataTablesForEach = {
     }
 
     self.Initialize = function () {
+        $("#author-table").DataTable({
+            "processing": true,
+            "serverSide": true,
+            "columns": [
+                { name: "FirstName", data: "FirstName" },
+                { name: "LastName", data: "LastName" },
+                { name: "BooksCount", data: "BooksCount" },
+                {
+                    name: "Authors", data: "Authors",
+                    render: function (authors) {
+                        var resultMarkup = "";
+                        var links = [];
+
+                        for (var i = 0; i < authors.length; i++) {
+                            var url = self.editAuthorUrl + "/" + authors[i].FirstName + "-" + authors[i].LastName;
+                            links[i] = "<p><a class='btn btn-link' href='" + url + "'>" + authors[i].FirstName + " " + authors[i].LastName + "</a></p>";
+                        }
+
+                        return links.join("");
+                    }
+                },
+                {
+                    data: null,
+                    render: function (data, type, row) {
+                        return "<a class='btn btn-info' href='#' onclick=BookGrid.EditBook('" + row.BookID + "'); >Edit</a>" +
+                            "<a href='#' class='btn btn-danger' onclick=BookGrid.DeleteBook('" + row.BookID + "'); >Delete</a>";
+                    }
+                },
+            ],
+            "ajax": {
+                "url": self.getBooksUrl,
+                "type": "POST",
+                "datatype": "json",
+                "data": function (d) {
+                    return Object.assign(d, BookFilter.vm.ToJS())
+                }
+            }
+        });
+
         ko.applyBindings(self.viewModel);
 
        

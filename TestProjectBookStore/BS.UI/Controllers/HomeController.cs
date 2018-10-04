@@ -37,7 +37,7 @@ namespace BS.UI.Controllers
             return books;
         }
 
-        public JsonResult GetAuthors()
+        public JsonResult GetAuthors(DataTableInfoVM model)
         {
             var result = authorDM.GetAuthors();
             var res = Json(result, JsonRequestBehavior.AllowGet);
