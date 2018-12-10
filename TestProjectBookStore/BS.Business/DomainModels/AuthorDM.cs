@@ -19,14 +19,23 @@ namespace BS.Business.DomainModels
             this.repo = repo;
         }
 
-        public IEnumerable<AuthorVM> GetAuthors()
+        public IEnumerable<AuthorVM> GetAuthors(DataTableInfoVM model, out int total, out int filtered)
         {
-            var result = Mapper.Map<IEnumerable<AuthorVM>>(repo.Get());
-            foreach (var author in result)
+            IEnumerable<AuthorEM> result;
+            if (model.Order.Count != 0)
             {
-                author.Mode = "display";
+                string columName = model.Columns[model.Order.First().Column].Name;
+                bool descOrder = model.Order.First().Dir.ToUpper() == "DESC";
+
+                result = repo.Get(model.Length, model.Start, out total, columName, descOrder);
             }
-            return result;
+            else
+            {
+                result = repo.Get(model.Length, model.Start, out total);
+            }
+
+            filtered = result.Count();
+            return Mapper.Map<IEnumerable<AuthorVM>>(result);
         }
 
         public IEnumerable<Select2AuthorsVM> GetAuthorsSelect2()

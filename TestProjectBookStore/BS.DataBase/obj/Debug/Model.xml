@@ -365,16 +365,68 @@
 		<Element Type="SqlProcedure" Name="[dbo].[USPAuthorDelete]">
 			<Property Name="BodyScript">
 				<Value><![CDATA[
-   DELETE 
-   FROM BookAuthor
-   WHERE AuthorId = @AuthorId
+	DECLARE @Transaction NVARCHAR(MAX) = 'USPAuthorDelete transaction';
 
-   DELETE
-   FROM Author
-   WHERE Id = @AuthorId]]></Value>
+	BEGIN TRANSACTION @Transaction;
+
+	BEGIN TRY
+	   DELETE 
+	   FROM BookAuthor
+	   WHERE AuthorId = @AuthorId
+
+	   DELETE
+	   FROM Author
+	   WHERE Id = @AuthorId
+	END TRY
+	BEGIN CATCH
+		IF @@TRANCOUNT > 0
+			BEGIN
+				ROLLBACK TRANSACTION @Transaction;
+			END;
+		DECLARE @ErrMessage   NVARCHAR(4000),
+				@ErrNumber    INT,
+				@ErrSeverity  INT,
+				@ErrState     INT,
+				@ErrLine      INT,
+				@ErrProcedure NVARCHAR(200);
+		SELECT @ErrNumber = ERROR_NUMBER()
+			  ,@ErrSeverity = ERROR_SEVERITY()
+			  ,@ErrState = ERROR_STATE()
+			  ,@ErrLine = ERROR_LINE()
+			  ,@ErrProcedure = ISNULL(ERROR_PROCEDURE(),'-');
+		SELECT @ErrMessage = N'Error %d, Level %d, State %d, Procedure %s, Line %d, '+'Message: '+ERROR_MESSAGE();
+		SELECT-1 AS [Result];
+		RAISERROR(@ErrMessage,@ErrSeverity,1,@ErrNumber,@ErrSeverity,@ErrState,@ErrProcedure,@ErrLine);
+	END CATCH;
+
+	IF @@TRANCOUNT > 0
+		BEGIN
+			COMMIT TRANSACTION @Transaction;
+		END;]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+				</Entry>
 				<Entry>
 					<References Name="[dbo].[BookAuthor]" />
 				</Entry>
@@ -414,7 +466,7 @@
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="180" />
+				<Property Name="Length" Value="1101" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPAuthorDelete]&#xD;&#xA;    @AuthorId int&#xD;&#xA;AS" />
@@ -423,14 +475,23 @@
 		<Element Type="SqlProcedure" Name="[dbo].[USPAuthorInsert]">
 			<Property Name="BodyScript">
 				<Value><![CDATA[
-    INSERT
-    INTO Author
+    INSERT 
+    INTO Author (FirstName, LastName, BooksCount)
     VALUES (@FirstName, @LastName, 0)]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Author]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[FirstName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[LastName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[BooksCount]" />
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[USPAuthorInsert].[@FirstName]" />
@@ -479,7 +540,7 @@
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="174" />
+				<Property Name="Length" Value="209" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPAuthorInsert]&#xD;&#xA;    @FirstName  NVARCHAR (50),&#xD;&#xA;    @LastName  NVARCHAR (50)&#xD;&#xA;AS" />
@@ -488,35 +549,86 @@
 		<Element Type="SqlProcedure" Name="[dbo].[USPBookDelete]">
 			<Property Name="BodyScript">
 				<Value><![CDATA[
-    
+	DECLARE @Transaction NVARCHAR(MAX) = 'USPBookDelete transaction';
 
-   
+	BEGIN TRANSACTION @Transaction;
 
+	BEGIN TRY
 
-	DECLARE @RemovedAuthorsId TABLE (
-		Id INT
-	);
+		DECLARE @RemovedAuthorsId TABLE (
+			Id INT
+		);
 
-	INSERT INTO @RemovedAuthorsId
-	SELECT AuthorId AS Id
-	FROM BookAuthor
-	WHERE BookId = @BookId
+		INSERT INTO @RemovedAuthorsId (Id)
+		SELECT AuthorId AS Id
+		FROM BookAuthor
+		WHERE BookId = @BookId
 
-	UPDATE [a]
-	SET [a].BooksCount = BooksCount-1
-	FROM Author [a]
-	INNER JOIN @RemovedAuthorsId [ra] ON [ra].Id = [a].Id 
+		UPDATE [a]
+		SET [a].BooksCount = BooksCount-1
+		FROM Author [a]
+		INNER JOIN @RemovedAuthorsId [ra] ON [ra].Id = [a].Id 
 
-	DELETE FROM BookAuthor
-    WHERE BookId = @BookId
+		DELETE FROM BookAuthor
+		WHERE BookId = @BookId
 
-	 DELETE FROM Book
-    WHERE Id = @BookId
+		 DELETE FROM Book
+		WHERE Id = @BookId
 
-RETURN 0]]></Value>
+		RETURN 0
+	END TRY
+	BEGIN CATCH
+		IF @@TRANCOUNT > 0
+			BEGIN
+				ROLLBACK TRANSACTION @Transaction;
+			END;
+		DECLARE @ErrMessage   NVARCHAR(4000),
+				@ErrNumber    INT,
+				@ErrSeverity  INT,
+				@ErrState     INT,
+				@ErrLine      INT,
+				@ErrProcedure NVARCHAR(200);
+		SELECT @ErrNumber = ERROR_NUMBER()
+			  ,@ErrSeverity = ERROR_SEVERITY()
+			  ,@ErrState = ERROR_STATE()
+			  ,@ErrLine = ERROR_LINE()
+			  ,@ErrProcedure = ISNULL(ERROR_PROCEDURE(),'-');
+		SELECT @ErrMessage = N'Error %d, Level %d, State %d, Procedure %s, Line %d, '+'Message: '+ERROR_MESSAGE();
+		SELECT-1 AS [Result];
+		RAISERROR(@ErrMessage,@ErrSeverity,1,@ErrNumber,@ErrSeverity,@ErrState,@ErrProcedure,@ErrLine);
+	END CATCH;
+
+	IF @@TRANCOUNT > 0
+		BEGIN
+			COMMIT TRANSACTION @Transaction;
+		END;]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPBookDelete].[@RemovedAuthorsId].[Id]" />
+				</Entry>
 				<Entry>
 					<References Name="[dbo].[BookAuthor]" />
 				</Entry>
@@ -597,7 +709,7 @@ RETURN 0]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="467" />
+				<Property Name="Length" Value="1381" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPBookDelete]&#xD;&#xA;    @BookId int&#xD;&#xA;AS" />
@@ -606,31 +718,100 @@ RETURN 0]]></Value>
 		<Element Type="SqlProcedure" Name="[dbo].[USPBookInsert]">
 			<Property Name="BodyScript">
 				<Value><![CDATA[
-    INSERT
-    INTO Book
-    VALUES (@Title, @ReleaseDate, @Rating, @PageCount)
+	
+	DECLARE @Transaction NVARCHAR(MAX) = 'USPBookInsert transaction';
 
-    DECLARE @BookID INT = IDENT_CURRENT('Book');
+	BEGIN TRANSACTION @Transaction;
 
-    INSERT
-    INTO BookAuthor (AuthorId, BookId)
-    SELECT [a].Id, @BookID
-    FROM @AuthorIds [a]
+	BEGIN TRY
+		-- Understand ordering commands in SELECT
+		-- Group BY and HAVING
+		-- Stored procedures msdn 
+		-- sql excersizes 
+		INSERT
+		INTO Book (Title, ReleaseDate, Rating, PageCount)
+		VALUES (@Title, @ReleaseDate, @Rating, @PageCount)
 
-	UPDATE [a]
-	SET [a].BooksCount = [a].BooksCount + 1
-	FROM Author [a]
-	Inner JOIN @AuthorIds [ai] ON [a].Id = [ai].Id
+		DECLARE @BookID INT = IDENT_CURRENT('Book');
 
-RETURN @BookID]]></Value>
+		INSERT
+		INTO BookAuthor (AuthorId, BookId)
+		SELECT [a].Id, @BookID
+		FROM @AuthorIds [a]
+
+		UPDATE [a]
+		SET [a].BooksCount = [a].BooksCount + 1
+		FROM Author [a]
+			JOIN @AuthorIds [ai] ON [a].Id = [ai].Id
+
+		RETURN @BookID
+	END TRY
+	BEGIN CATCH
+		IF @@TRANCOUNT > 0
+			BEGIN
+				ROLLBACK TRANSACTION @Transaction;
+			END;
+		DECLARE @ErrMessage   NVARCHAR(4000),
+				@ErrNumber    INT,
+				@ErrSeverity  INT,
+				@ErrState     INT,
+				@ErrLine      INT,
+				@ErrProcedure NVARCHAR(200);
+		SELECT @ErrNumber = ERROR_NUMBER()
+			  ,@ErrSeverity = ERROR_SEVERITY()
+			  ,@ErrState = ERROR_STATE()
+			  ,@ErrLine = ERROR_LINE()
+			  ,@ErrProcedure = ISNULL(ERROR_PROCEDURE(),'-');
+		SELECT @ErrMessage = N'Error %d, Level %d, State %d, Procedure %s, Line %d, '+'Message: '+ERROR_MESSAGE();
+		SELECT-1 AS [Result];
+		RAISERROR(@ErrMessage,@ErrSeverity,1,@ErrNumber,@ErrSeverity,@ErrState,@ErrProcedure,@ErrLine);
+	END CATCH;
+
+	IF @@TRANCOUNT > 0
+		BEGIN
+			COMMIT TRANSACTION @Transaction;
+		END;]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
+					<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+				</Entry>
+				<Entry>
 					<References ExternalSource="BuiltIns" Name="[int]" />
 				</Entry>
 				<Entry>
+					<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+				</Entry>
+				<Entry>
 					<References Name="[dbo].[Book]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Book].[Title]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Book].[ReleaseDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Book].[Rating]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Book].[PageCount]" />
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[USPBookInsert].[@Title]" />
@@ -677,7 +858,7 @@ RETURN @BookID]]></Value>
 			</Relationship>
 			<Relationship Name="DynamicObjects">
 				<Entry>
-					<Element Type="SqlDynamicColumnSource" Name="[dbo].[USPBookInsert].[@AuthorIds]" Disambiguator="3">
+					<Element Type="SqlDynamicColumnSource" Name="[dbo].[USPBookInsert].[@AuthorIds]" Disambiguator="4">
 						<Relationship Name="Columns">
 							<Entry>
 								<Element Type="SqlSimpleColumn" Name="[dbo].[USPBookInsert].[@AuthorIds].[Id]">
@@ -784,7 +965,7 @@ RETURN @BookID]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="565" />
+				<Property Name="Length" Value="1629" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPBookInsert]&#xD;&#xA;    @Title NVARCHAR (50),&#xD;&#xA;    @AuthorIds [dbo].IntArray READONLY,&#xD;&#xA;    @ReleaseDate DATE,&#xD;&#xA;    @Rating FLOAT (53),&#xD;&#xA;    @PageCount INT&#xD;&#xA;&#xD;&#xA;AS" />
@@ -793,8 +974,44 @@ RETURN @BookID]]></Value>
 		<Element Type="SqlProcedure" Name="[dbo].[USPGetAuthor]">
 			<Property Name="BodyScript">
 				<Value><![CDATA[
-    SELECT Author.Id AS AuthorId, * FROM Author
-    WHERE ISNULL(@AuthorId, Author.Id) = Author.Id]]></Value>
+     SELECT @Total = COUNT(*)
+     FROM [Author];
+
+     SELECT [Id] AS AuthorId, [FirstName], [LastName], [BooksCount]
+     FROM
+     (
+         SELECT DENSE_RANK() OVER(ORDER BY CASE
+                                               WHEN @ColumName = 'FirstName'
+                                                    AND @DescendingOrder = 1
+                                               THEN [a].[FirstName]
+                                           END DESC,
+                                           CASE
+                                               WHEN @ColumName = 'FirstName'
+                                               THEN [a].[FirstName]
+                                           END,
+                                           CASE
+                                               WHEN @ColumName = 'LastName'
+                                                    AND @DescendingOrder = 1
+                                               THEN [a].[LastName]
+                                           END DESC,
+                                           CASE
+                                               WHEN @ColumName = 'LastName'
+                                               THEN [a].[LastName]
+                                           END,
+                                           CASE
+                                               WHEN @ColumName = 'BooksCount'
+                                                    AND @DescendingOrder = 1
+                                               THEN [a].[BooksCount]
+                                           END DESC,
+                                           CASE
+                                               WHEN @ColumName = 'BooksCount'
+                                               THEN [a].[BooksCount]
+                                           END) AS [AuthorNum],
+                                           *
+
+         FROM [Author] [a]
+     ) t
+     WHERE t.[AuthorNum] BETWEEN @Start * (@Length + 1) AND (@Start + 1) * @Length;]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
@@ -802,13 +1019,31 @@ RETURN @BookID]]></Value>
 					<References Name="[dbo].[Author]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[Author].[Id]" />
+					<References Name="[dbo].[USPGetAuthor].[@Total]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[USPGetAuthor].[@AuthorId]" />
+					<References Name="[dbo].[Author]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[Author].[Id]" />
+					<References Name="[dbo].[USPGetAuthor].[@ColumName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPGetAuthor].[@DescendingOrder]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[FirstName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[LastName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Author].[BooksCount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPGetAuthor].[@Start]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPGetAuthor].[@Length]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="Parameters">
@@ -830,6 +1065,95 @@ RETURN @BookID]]></Value>
 						</Relationship>
 					</Element>
 				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPGetAuthor].[@Start]">
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA[1]]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPGetAuthor].[@Length]">
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA[1000]]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPGetAuthor].[@Total]">
+						<Property Name="IsOutput" Value="True" />
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPGetAuthor].[@ColumName]">
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA['AuthorId']]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[USPGetAuthor].[@DescendingOrder]">
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA[0]]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
 			</Relationship>
 			<Relationship Name="Schema">
 				<Entry>
@@ -837,10 +1161,10 @@ RETURN @BookID]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="168" />
+				<Property Name="Length" Value="2379" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPGetAuthor]&#xD;&#xA;    @AuthorId INT = NULL&#xD;&#xA;AS" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPGetAuthor]&#xD;&#xA;    @AuthorId INT = NULL,&#xD;&#xA;    @Start                     INT           = 1, &#xD;&#xA;    @Length                    INT           = 1000, &#xD;&#xA;    @Total                     INT OUTPUT, &#xD;&#xA;    @ColumName                 NVARCHAR(50)  = 'AuthorId', &#xD;&#xA;    @DescendingOrder           BIT           = 0&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="SqlProcedure" Name="[dbo].[USPGetBook]">
@@ -861,7 +1185,6 @@ RETURN @BookID]]></Value>
 
         OPEN @CustomCursor 
         FETCH NEXT FROM @CustomCursor INTO @Id;
-
 
         WHILE @@FETCH_STATUS = 0
             BEGIN
@@ -955,10 +1278,10 @@ RETURN @BookID]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="973" />
+				<Property Name="Length" Value="990" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPGetBook]&#xD;&#xA;    @BookId int = NULL&#xD;&#xA;AS" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPGetBook]&#xD;&#xA;    @BookId                    INT = NULL&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="SqlProcedure" Name="[dbo].[USPUpdateAuthor]">
@@ -1056,47 +1379,102 @@ RETURN @BookID]]></Value>
 		<Element Type="SqlProcedure" Name="[dbo].[USPUpdateBook]">
 			<Property Name="BodyScript">
 				<Value><![CDATA[
-	--Remove current authors
-	DECLARE @RemovedAuthorsId TABLE (
-		Id INT
-	);
+	DECLARE @Transaction NVARCHAR(MAX) = 'USPUodateBook transaction';
 
-	INSERT INTO @RemovedAuthorsId
-	SELECT AuthorId AS Id
-	FROM BookAuthor
-	WHERE BookId = @Id
+	BEGIN TRANSACTION @Transaction;
 
-	DELETE
-    FROM BookAuthor
-    WHERE BookId = @Id
+	BEGIN TRY
+		--Remove current authors
+		DECLARE @RemovedAuthorsId TABLE (
+			Id INT
+		);
 
-	--Reduce current authors book counts
-	UPDATE [a]
-	SET [a].BooksCount = BooksCount-1
-	FROM Author [a]
-	INNER JOIN @RemovedAuthorsId [ra] ON [ra].Id = [a].Id 
+		INSERT INTO @RemovedAuthorsId (Id)
+		SELECT AuthorId AS Id
+		FROM BookAuthor
+		WHERE BookId = @Id
 
-	--Update book
-    UPDATE Book
-    SET Title = @Title, ReleaseDate = @ReleaseDate, Rating = @Rating, PageCount = @PageCount
-    WHERE Id =  @Id
+		DELETE
+		FROM BookAuthor
+		WHERE BookId = @Id
+
+		--Reduce current authors book counts
+		UPDATE [a]
+		SET [a].BooksCount = BooksCount-1
+		FROM Author [a]
+		INNER JOIN @RemovedAuthorsId [ra] ON [ra].Id = [a].Id 
+
+		--Update book
+		UPDATE Book
+		SET Title = @Title, ReleaseDate = @ReleaseDate, Rating = @Rating, PageCount = @PageCount
+		WHERE Id =  @Id
 
    
-    --Insert New Authors and increase their BooksCount
-    INSERT
-    INTO BookAuthor (AuthorId, BookId)
-    SELECT [a].Id, @Id
-    FROM @AuthorIds [a]
+		--Insert New Authors and increase their BooksCount
+		INSERT
+		INTO BookAuthor (AuthorId, BookId)
+		SELECT [a].Id, @Id
+		FROM @AuthorIds [a]
 
-	UPDATE [a]
-	SET [a].BooksCount = [a].BooksCount + 1
-	FROM Author [a]
-	Inner JOIN @AuthorIds [ai] ON [a].Id = [ai].Id
+		UPDATE [a]
+		SET [a].BooksCount = [a].BooksCount + 1
+		FROM Author [a]
+		Inner JOIN @AuthorIds [ai] ON [a].Id = [ai].Id
 
-RETURN @Id]]></Value>
+		RETURN @Id
+	END TRY
+	BEGIN CATCH
+		IF @@TRANCOUNT > 0
+			BEGIN
+				ROLLBACK TRANSACTION @Transaction;
+			END;
+		DECLARE @ErrMessage   NVARCHAR(4000),
+				@ErrNumber    INT,
+				@ErrSeverity  INT,
+				@ErrState     INT,
+				@ErrLine      INT,
+				@ErrProcedure NVARCHAR(200);
+		SELECT @ErrNumber = ERROR_NUMBER()
+			  ,@ErrSeverity = ERROR_SEVERITY()
+			  ,@ErrState = ERROR_STATE()
+			  ,@ErrLine = ERROR_LINE()
+			  ,@ErrProcedure = ISNULL(ERROR_PROCEDURE(),'-');
+		SELECT @ErrMessage = N'Error %d, Level %d, State %d, Procedure %s, Line %d, '+'Message: '+ERROR_MESSAGE();
+		SELECT-1 AS [Result];
+		RAISERROR(@ErrMessage,@ErrSeverity,1,@ErrNumber,@ErrSeverity,@ErrState,@ErrProcedure,@ErrLine);
+	END CATCH;
+
+	IF @@TRANCOUNT > 0
+		BEGIN
+			COMMIT TRANSACTION @Transaction;
+		END;]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[USPUpdateBook].[@RemovedAuthorsId].[Id]" />
+				</Entry>
 				<Entry>
 					<References Name="[dbo].[BookAuthor]" />
 				</Entry>
@@ -1193,7 +1571,7 @@ RETURN @Id]]></Value>
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlDynamicColumnSource" Name="[dbo].[USPUpdateBook].[@AuthorIds]" Disambiguator="4">
+					<Element Type="SqlDynamicColumnSource" Name="[dbo].[USPUpdateBook].[@AuthorIds]" Disambiguator="3">
 						<Relationship Name="Columns">
 							<Entry>
 								<Element Type="SqlSimpleColumn" Name="[dbo].[USPUpdateBook].[@AuthorIds].[Id]">
@@ -1315,7 +1693,7 @@ RETURN @Id]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="1043" />
+				<Property Name="Length" Value="1962" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[USPUpdateBook]&#xD;&#xA;    @Id INT,&#xD;&#xA;    @Title NVARCHAR (50),&#xD;&#xA;    @AuthorIds [dbo].IntArray READONLY,&#xD;&#xA;    @ReleaseDate DATE,&#xD;&#xA;    @Rating FLOAT (53),&#xD;&#xA;    @PageCount INT&#xD;&#xA;&#xD;&#xA;AS" />

@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[USPGetBook]
-    @BookId int = NULL
+    @BookId                    INT = NULL
 AS
     BEGIN
         SELECT Id as BookId, * FROM Book
@@ -16,10 +16,6 @@ AS
 
         OPEN @CustomCursor 
         FETCH NEXT FROM @CustomCursor INTO @Id;
-
-        SELECT Group, SUM(Count)
-        FROM table
-        Group by Group
 
         WHILE @@FETCH_STATUS = 0
             BEGIN

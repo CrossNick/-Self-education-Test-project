@@ -30,6 +30,10 @@ namespace BS.UI.Controllers
         {
             return View();
         }
+        public ActionResult WebForms()
+        {
+            return View();
+        }
         public JsonResult GetBooks()
         {
             var result = bookDM.GetBooks();
@@ -39,9 +43,8 @@ namespace BS.UI.Controllers
 
         public JsonResult GetAuthors(DataTableInfoVM model)
         {
-            var result = authorDM.GetAuthors();
-            var res = Json(result, JsonRequestBehavior.AllowGet);
-            return res;
+            var result = authorDM.GetAuthors(model, out int total, out int filtered);
+            return Json(new { draw = model.Draw, recordsFiltered = filtered, recordsTotal = total, data = result });
         }
 
     }

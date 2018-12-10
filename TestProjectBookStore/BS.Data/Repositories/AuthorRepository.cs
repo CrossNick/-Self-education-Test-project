@@ -41,14 +41,24 @@ namespace BS.Data.Repositories
             }
         }
 
-        public IEnumerable<AuthorEM> Get()
+        public IEnumerable<AuthorEM> Get(int Length, int Start, out int total, string columName = null, bool descOrder = false)
         {
-            IEnumerable<AuthorEM> result;
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                result = db.Query<AuthorEM>(SP_GET_AUTHOR, null, null, true, null, CommandType.StoredProcedure);
+                IEnumerable<AuthorEM> result;
+                var spParams = new DynamicParameters();
+                spParams.Add("Length", Length);
+                spParams.Add("Start", Start);
+                if (columName != null)
+                {
+                    spParams.Add("ColumName", columName);
+                    spParams.Add("DescendingOrder", descOrder);
+                }
+                spParams.Add("Total", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                result = db.Query<AuthorEM>(SP_GET_AUTHOR, spParams, commandType: CommandType.StoredProcedure);
+                total = spParams.Get<int>("Total");
+                return result;
             }
-            return result;
         }
         public AuthorEM Get(int AuthorId)
         {
@@ -60,6 +70,11 @@ namespace BS.Data.Repositories
                 result = db.Query<AuthorEM>(SP_GET_AUTHOR, sqlParams, null, true, null, CommandType.StoredProcedure).FirstOrDefault();
             }
             return result;
+        }
+
+        public IEnumerable<AuthorEM> Get()
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(AuthorEM author)

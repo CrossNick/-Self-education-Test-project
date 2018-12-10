@@ -9,5 +9,7 @@ namespace BS.Data.Repositories
 {
     public interface IAuthorRepository : IRepository<AuthorEM>
     {
+
+        IEnumerable<AuthorEM> Get(int Length, int Start, out int total, string columName=null, bool descOrder=false);
     }
 }

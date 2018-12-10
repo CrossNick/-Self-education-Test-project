@@ -9,7 +9,7 @@ namespace BS.Business.DomainModels
 {
     public interface IAuthorDM
     {
-        IEnumerable<AuthorVM> GetAuthors();
+        IEnumerable<AuthorVM> GetAuthors(DataTableInfoVM model, out int total, out int filtered);
         IEnumerable<Select2AuthorsVM> GetAuthorsSelect2();
         AuthorVM AddAuthor(AuthorVM author);
         int UpdateAuthor(AuthorVM author);
