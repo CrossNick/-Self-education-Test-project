@@ -28,25 +28,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/12/2018 16:48:35</publishTime>
     </File>
     <File Include="bin/BS.Business.dll">
-      <publishTime>12/10/2018 17:12:42</publishTime>
+      <publishTime>12/17/2018 18:17:57</publishTime>
     </File>
     <File Include="bin/BS.Business.pdb">
-      <publishTime>12/10/2018 17:12:42</publishTime>
+      <publishTime>12/17/2018 18:17:57</publishTime>
     </File>
     <File Include="bin/BS.Data.dll">
-      <publishTime>12/10/2018 17:12:42</publishTime>
+      <publishTime>12/17/2018 18:17:57</publishTime>
     </File>
     <File Include="bin/BS.Data.dll.config">
       <publishTime>08/07/2018 10:40:57</publishTime>
     </File>
     <File Include="bin/BS.Data.pdb">
-      <publishTime>12/10/2018 17:12:42</publishTime>
+      <publishTime>12/17/2018 18:17:57</publishTime>
     </File>
     <File Include="bin/BS.UI.dll">
-      <publishTime>12/10/2018 18:01:05</publishTime>
+      <publishTime>12/17/2018 18:18:01</publishTime>
     </File>
     <File Include="bin/BS.UI.pdb">
-      <publishTime>12/10/2018 18:01:05</publishTime>
+      <publishTime>12/17/2018 18:18:01</publishTime>
     </File>
     <File Include="bin/Dapper.dll">
       <publishTime>07/12/2018 16:48:35</publishTime>
@@ -556,7 +556,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/01/2018 10:39:56</publishTime>
     </File>
     <File Include="Views/Home/WebForms.cshtml">
-      <publishTime>12/10/2018 18:10:02</publishTime>
+      <publishTime>12/17/2018 17:10:17</publishTime>
     </File>
     <File Include="Views/Home/_CreateAuthorPopup.cshtml">
       <publishTime>09/05/2018 12:56:57</publishTime>
@@ -583,7 +583,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/12/2018 16:48:35</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/10/2018 18:01:16</publishTime>
+      <publishTime>12/17/2018 17:34:56</publishTime>
     </File>
   </ItemGroup>
 </Project>
