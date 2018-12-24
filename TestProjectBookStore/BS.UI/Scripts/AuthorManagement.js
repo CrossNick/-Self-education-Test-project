@@ -16,7 +16,7 @@
             $('#create-author-modal').modal('hide');
             getAuthorsAjax();
         });
-    } 
+    }; 
 
 
     self.Initialize = function () {

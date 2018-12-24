@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BS.Business;
+using BS.WebForms.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +18,7 @@ namespace BS.WebForms
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            MapConfig.Init();
         }
     }
 }

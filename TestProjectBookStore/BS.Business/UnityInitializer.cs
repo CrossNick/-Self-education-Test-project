@@ -16,7 +16,7 @@ namespace BS.Business
             UnityInitializer.container = container;
             container.RegisterType<IBookRepository, BookRepository>();
             container.RegisterType<IAuthorRepository, AuthorRepository>();
-            
+            container.RegisterType<IReviewRepository, ReviewRepository>();
         }
     }
 }

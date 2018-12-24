@@ -28,25 +28,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/12/2018 16:48:35</publishTime>
     </File>
     <File Include="bin/BS.Business.dll">
-      <publishTime>12/17/2018 18:17:57</publishTime>
+      <publishTime>12/24/2018 17:27:13</publishTime>
     </File>
     <File Include="bin/BS.Business.pdb">
-      <publishTime>12/17/2018 18:17:57</publishTime>
+      <publishTime>12/24/2018 17:27:13</publishTime>
     </File>
     <File Include="bin/BS.Data.dll">
-      <publishTime>12/17/2018 18:17:57</publishTime>
+      <publishTime>12/21/2018 17:32:38</publishTime>
     </File>
     <File Include="bin/BS.Data.dll.config">
       <publishTime>08/07/2018 10:40:57</publishTime>
     </File>
     <File Include="bin/BS.Data.pdb">
-      <publishTime>12/17/2018 18:17:57</publishTime>
+      <publishTime>12/21/2018 17:32:38</publishTime>
     </File>
     <File Include="bin/BS.UI.dll">
-      <publishTime>12/17/2018 18:18:01</publishTime>
+      <publishTime>12/24/2018 17:27:16</publishTime>
     </File>
     <File Include="bin/BS.UI.pdb">
-      <publishTime>12/17/2018 18:18:01</publishTime>
+      <publishTime>12/24/2018 17:27:16</publishTime>
     </File>
     <File Include="bin/Dapper.dll">
       <publishTime>07/12/2018 16:48:35</publishTime>
@@ -322,7 +322,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/20/2018 12:53:13</publishTime>
     </File>
     <File Include="Scripts/AuthorManagement.js">
-      <publishTime>10/05/2018 15:59:48</publishTime>
+      <publishTime>12/18/2018 17:28:47</publishTime>
     </File>
     <File Include="Scripts/BookManagement.js">
       <publishTime>10/01/2018 10:36:03</publishTime>

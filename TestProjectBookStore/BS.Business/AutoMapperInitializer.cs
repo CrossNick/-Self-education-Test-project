@@ -23,6 +23,7 @@ namespace BS.Business
                     .ForMember(dest => dest.id, opt => opt.ResolveUsing(src => { return src.AuthorId; }))
                     .ForMember(dest => dest.text, opt => opt.ResolveUsing(src => { return src.FirstName + " " + src.LastName; }));
                 cfg.CreateMap<BookCreateEM, BookCreateEM>();
+                cfg.CreateMap<ReviewEM, ReviewVM>();
             });
         }
     }
