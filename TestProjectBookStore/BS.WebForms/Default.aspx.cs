@@ -22,37 +22,26 @@ namespace BS.WebForms
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+        }
+
+        protected void BSDataSource_Deleting(object sender, SqlDataSourceCommandEventArgs e)
+        {
 
         }
 
-        public IQueryable<ReviewVMWF> reviewGrid_GetData()
-        {
 
-            var query = Mapper.Map<IEnumerable<ReviewVMWF>>(reviewDM.GetReviews()).AsQueryable();
-            return query;
-        }
-
-        public void reviewGrid_UpdateItem(int Id)
+        protected void reviewGrid_RowDataBound1(object sender, GridViewRowEventArgs e)
         {
-            var item = Mapper.Map<ReviewVMWF>(reviewDM.GetReview(Id));
-            if (item == null)
+            if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                ModelState.AddModelError("",
-                  String.Format("Item with id {0} was not found", Id));
-                return;
+                if (e.Row.RowState == DataControlRowState.Normal || e.Row.RowState == DataControlRowState.Alternate)
+                {
+                    LinkButton lnkDetete = ((LinkButton)e.Row.Cells[0].Controls[2]);
+                    if (lnkDetete != null)
+                        lnkDetete.Attributes["onclick"] = "$('.modal').modal('toggle'); return   false;";
+                }
             }
-
-            TryUpdateModel(item);
-            if (ModelState.IsValid)
-            {
-                reviewDM.EditReview(Mapper.Map<ReviewVM>(item));
-            }
-
-        }
-
-        public void reviewGrid_DeleteItem(int Id)
-        {
-            reviewDM.DeleteReview(Id);
         }
     }
 }

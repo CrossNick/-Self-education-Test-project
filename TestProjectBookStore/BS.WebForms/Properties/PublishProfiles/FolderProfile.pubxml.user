@@ -40,25 +40,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/17/2018 10:14:56</publishTime>
     </File>
     <File Include="bin/BS.Business.dll">
-      <publishTime>12/24/2018 17:27:13</publishTime>
+      <publishTime>12/27/2018 16:20:31</publishTime>
     </File>
     <File Include="bin/BS.Business.pdb">
-      <publishTime>12/24/2018 17:27:13</publishTime>
+      <publishTime>12/27/2018 16:20:31</publishTime>
     </File>
     <File Include="bin/BS.Data.dll">
-      <publishTime>12/21/2018 17:32:38</publishTime>
+      <publishTime>12/27/2018 16:20:31</publishTime>
     </File>
     <File Include="bin/BS.Data.dll.config">
       <publishTime>08/07/2018 10:40:57</publishTime>
     </File>
     <File Include="bin/BS.Data.pdb">
-      <publishTime>12/21/2018 17:32:38</publishTime>
+      <publishTime>12/27/2018 16:20:31</publishTime>
     </File>
     <File Include="bin/BS.WebForms.dll">
-      <publishTime>12/24/2018 17:33:58</publishTime>
+      <publishTime>12/31/2018 14:27:27</publishTime>
     </File>
     <File Include="bin/BS.WebForms.pdb">
-      <publishTime>12/24/2018 17:33:58</publishTime>
+      <publishTime>12/31/2018 14:27:27</publishTime>
     </File>
     <File Include="bin/Dapper.dll">
       <publishTime>07/12/2018 16:48:35</publishTime>
@@ -328,7 +328,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/10/2018 17:12:10</publishTime>
     </File>
     <File Include="Default.aspx">
-      <publishTime>12/24/2018 17:23:42</publishTime>
+      <publishTime>12/31/2018 14:21:37</publishTime>
     </File>
     <File Include="DynamicData/EntityTemplates/Default.ascx">
       <publishTime>12/21/2018 16:28:03</publishTime>
@@ -520,7 +520,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/10/2018 17:12:22</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/24/2018 14:10:11</publishTime>
+      <publishTime>12/27/2018 16:20:36</publishTime>
     </File>
   </ItemGroup>
 </Project>
