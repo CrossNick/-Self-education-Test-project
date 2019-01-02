@@ -15,6 +15,7 @@ namespace BS.WebForms
     public partial class _Default : Page
     {
         IReviewDM reviewDM;
+        static int lastId;
         public _Default()
         {
             reviewDM = 
@@ -27,7 +28,15 @@ namespace BS.WebForms
 
         protected void BSDataSource_Deleting(object sender, SqlDataSourceCommandEventArgs e)
         {
-
+            if (e.Command.Parameters[0].Value == null)
+            {
+                e.Command.Parameters[0].Value = lastId;
+            }
+            else
+            {
+                lastId = (int)e.Command.Parameters[0].Value;
+                e.Command.Parameters[0].Value = null;
+            }
         }
 
 
@@ -39,9 +48,18 @@ namespace BS.WebForms
                 {
                     LinkButton lnkDetete = ((LinkButton)e.Row.Cells[0].Controls[2]);
                     if (lnkDetete != null)
-                        lnkDetete.Attributes["onclick"] = "$('.modal').modal('toggle'); return   false;";
+                    {
+                        var attr = lnkDetete.Attributes["href"];
+                        lnkDetete.Attributes["onclick"] = "$('.modal').modal('toggle');";
+                    }
+                        
                 }
             }
+        }
+
+        protected void ConfirmDelete_Click(object sender, EventArgs e)
+        {
+            BSDataSource.Delete();
         }
     }
 }
