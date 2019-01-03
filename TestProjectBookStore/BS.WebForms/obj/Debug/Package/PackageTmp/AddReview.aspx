@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddReview.aspx.cs" Inherits="BS.WebForms.AddReview" %>
+﻿<%@ Page Title="" Language="C#" Theme="MyTheme" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddReview.aspx.cs" Inherits="BS.WebForms.AddReview" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:FormView runat="server" ID="addReviewForm"
     ItemType="BS.WebForms.WFViewModels.ReviewVMWF" 
