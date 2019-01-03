@@ -14,4 +14,11 @@
         </fieldset>
     </InsertItemTemplate>
 </asp:FormView>
+<script>
+    $( document ).ready(function() {
+        $('#MainContent_addReviewForm_ctl04_ctl02___DateOfBirth_TextBox1').datepicker({
+            format: 'mm-dd-yyyy'
+        });
+    });
+</script>
 </asp:Content>
