@@ -25,6 +25,7 @@ namespace BS.WebForms
             var item = new ReviewVMWF();
 
             TryUpdateModel(item);
+            Page.Validate();
             if (ModelState.IsValid)
             {
                 reviewDM.CreateReview(Mapper.Map<ReviewVM>(item));

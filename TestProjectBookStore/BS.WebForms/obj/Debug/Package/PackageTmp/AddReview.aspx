@@ -9,16 +9,17 @@
             <ol>
                 <asp:DynamicEntity runat="server" Mode="Insert" />
             </ol>
+            <asp:validationsummary id="valSummary" runat="server" headertext="Validation Errors:" cssclass="ValidationSummary" />
             <asp:Button runat="server" Text="Insert" CommandName="Insert" />
             <asp:Button runat="server" Text="Cancel" CausesValidation="false" OnClick="cancelButton_Click" />
         </fieldset>
     </InsertItemTemplate>
 </asp:FormView>
-<script>
+<%--<script>
     $( document ).ready(function() {
         $('#MainContent_addReviewForm_ctl04_ctl02___DateOfBirth_TextBox1').datepicker({
             format: 'mm-dd-yyyy'
         });
     });
-</script>
+</script>--%>
 </asp:Content>
