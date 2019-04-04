@@ -37,8 +37,8 @@ namespace BS.UI
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/BS.css",
-                      "~/Content/select2.css"));
+                      "~/Content/css/Styles.css",
+                      "~/Content/css/select2.css"));
         }
     }
 }

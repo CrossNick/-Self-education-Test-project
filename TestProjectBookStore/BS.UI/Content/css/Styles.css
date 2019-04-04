@@ -1,0 +1,62 @@
+﻿ul li a {
+  color: white; }
+
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+  background-color: #d5e0d2; }
+
+ul li {
+  display: inline-block; }
+  ul li a {
+    font-size: 14px;
+    background-color: #8E1233; }
+
+nav {
+  margin: 20px;
+  border-radius: 50px;
+  background-color: #59020b; }
+
+.odd {
+  background-image: #59020b; }
+
+.even {
+  background-image: #59020b; }
+
+#book-table {
+  background-image: #59020b; }
+
+.btn {
+  background-color: #8E1233; }
+  .btn:hover {
+    background-color: #ed9393; }
+
+.navbar-brand {
+  color: white; }
+
+.body-content {
+  padding-left: 15px;
+  padding-right: 15px; }
+
+.dl-horizontal dt {
+  white-space: normal; }
+
+input,
+select,
+textarea {
+  max-width: 280px; }
+
+#navbar_header {
+  color: white;
+  margin-right: 10px; }
+
+.select2 {
+  width: 100%; }
+
+th,
+td {
+  white-space: nowrap; }
+
+div.dataTables_wrapper {
+  width: 600px;
+  margin: 0 auto; }

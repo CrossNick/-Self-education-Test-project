@@ -1,0 +1,4 @@
+﻿@mixin setTextColorAndSize($color, $size) {
+    font-size: $size;
+    background-color: $color;
+}

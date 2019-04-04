@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "Content/css/Styles.css",
+    "inputFile": "Content/css/Styles.scss"
+  },
+  {
+    "outputFile": "Content/css/_mixins.css",
+    "inputFile": "Content/css/_mixins.scss"
+  },
+  {
+    "outputFile": "Content/css/_variables.css",
+    "inputFile": "Content/css/_variables.scss"
+  }
+]
