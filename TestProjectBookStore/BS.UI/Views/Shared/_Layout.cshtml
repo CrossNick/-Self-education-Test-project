@@ -23,26 +23,26 @@
         });
     </script>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="navbar-header">
+<body class="p-top-50 p-bott-50 bg-c-main">
+    <nav class="navbar m-nav border-rad-50 bg-c-standart">
+        <div class="navbar-header c-white m-r-10">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Book Store</a>
+            <a class="navbar-brand c-white" href="#">Book Store</a>
         </div>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="nav navbar-nav mr-auto">
-                <li><a id="getBooksLink" data-url="@Url.Action("GetBooks", "Home")" href="@Url.Action("ViewBooks", "Home")">Book Catalog</a></li>
-                <li><a id="getAuthorsLink" data-url="@Url.Action("GetAuthors", "Home")" href="@Url.Action("ViewAuthors", "Home")">Authors</a></li>
-                <li><a id="getWebFormsLink" href="@Url.Action("WebForms", "Home")">Web Forms</a></li>
+                <li class="display-inline-block"><a id="getBooksLink" class="c-white bg-c-primary f-s-standart" data-url="@Url.Action("GetBooks", "Home")" href="@Url.Action("ViewBooks", "Home")">Book Catalog</a></li>
+                <li class="display-inline-block"><a id="getAuthorsLink" class="c-white bg-c-primary f-s-standart" data-url="@Url.Action("GetAuthors", "Home")" href="@Url.Action("ViewAuthors", "Home")">Authors</a></li>
+                <li class="display-inline-block"><a id="getWebFormsLink" class="c-white bg-c-primary f-s-standart" href="@Url.Action("WebForms", "Home")">Web Forms</a></li>
             </ul>
         </div>
     </nav>
-    <div class="container body-content">
+    <div class="container body-content p-l-15 p-r-15">
         @RenderBody()
         <hr />
     </div>

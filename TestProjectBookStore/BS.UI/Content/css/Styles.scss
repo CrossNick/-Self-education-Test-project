@@ -1,8 +1,89 @@
 ﻿@import '_mixins.scss';
 @import '_variables.scss';
 
-%white-text {
-    color:white;
+.p-top-50 {
+    padding-top: 50px;
+}
+
+.p-bott-50 {
+    padding-bottom: 20px;
+}
+
+.bg-c-main {
+    background-color: $main-bg-color;
+}
+
+.c-white {
+    color: white;
+}
+
+.display-inline-block {
+    display: inline-block;
+}
+
+.f-s-standart {
+    font-size: $std-font-size;
+}
+
+.bg-c-primary {
+    background-color: $primary-color;
+}
+
+.bg-c-secondary {
+    background-color: $secondary-color;
+}
+
+.m-nav {
+    margin: $nav-margin;
+}
+
+.border-rad-50 {
+    border-radius: 50px;
+}
+
+.bg-c-standart {
+    background-color: $bg-color;
+}
+
+.p-l-15 {
+    padding-left: 15px;
+}
+
+.p-r-15 {
+    padding-right: 15px;
+}
+
+.white-space-normal {
+    white-space: normal;
+}
+
+.white-space-nowrap {
+    white-space: nowrap;
+}
+
+.max-w-280 {
+    max-width: 280px;
+}
+
+m-r-10{
+    margin-right: 10px;
+}
+
+w-100-per{
+    width: 100%;
+}
+
+w-600 {
+    width: 600px;
+}
+
+m-0-auto {
+    margin: 0 auto;
+}
+
+//Old
+/*%white-text {
+    color: white;
 }
 
 body {
@@ -17,7 +98,7 @@ ul {
 
         a {
             @extend %white-text;
-            @include setTextColorAndSize($primary-color, 14px);
+            @include setTextColorAndSize($primary-color, $std-font-size);
         }
     }
 }
@@ -30,12 +111,12 @@ nav {
 
 @each $row in odd, even {
     .#{$row} {
-        background-image: $bg-color;
+        background-color: $bg-color;
     }
 }
 
 #book-table {
-    background-image: $bg-color;
+    background-color: $bg-color;
 }
 
 .btn {
@@ -82,4 +163,4 @@ td {
 div.dataTables_wrapper {
     width: 600px;
     margin: 0 auto;
-}
+}*/
