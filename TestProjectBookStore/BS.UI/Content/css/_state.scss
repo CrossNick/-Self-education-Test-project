@@ -1,0 +1,6 @@
+﻿@import '_mixins.scss';
+@import '_variables.scss';
+
+.btn:hover {
+        background-color: $secondary-color;
+}

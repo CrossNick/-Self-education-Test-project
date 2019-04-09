@@ -1,0 +1,8 @@
+﻿@import '_mixins.scss';
+@import '_variables.scss';
+
+.item-link {
+    color: white;
+    @include setTextColorAndSize($primary-color, 14px);
+}
+

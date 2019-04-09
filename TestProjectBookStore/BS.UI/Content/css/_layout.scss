@@ -1,0 +1,25 @@
+﻿@import '_mixins.scss';
+@import '_variables.scss';
+
+.navbar {
+    margin: $nav-margin;
+    border-radius: 50px;
+
+    ul {
+        li {
+            display: inline-block;
+        }
+    }
+}
+
+
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+div.dataTables_wrapper {
+    width: 600px;
+    margin: 0 auto;
+}

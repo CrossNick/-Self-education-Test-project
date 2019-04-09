@@ -1,85 +1,9 @@
 ﻿@import '_mixins.scss';
 @import '_variables.scss';
 
-%white-text {
-    color:white;
-}
+@import '_base.scss';
+@import '_layout.scss';
+@import '_module.scss';
+@import '_state.scss';
+@import '_theme.scss';
 
-body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-    background-color: #d5e0d2;
-}
-
-ul {
-    li {
-        display: inline-block;
-
-        a {
-            @extend %white-text;
-            @include setTextColorAndSize($primary-color, 14px);
-        }
-    }
-}
-
-nav {
-    margin: $nav-margin;
-    border-radius: 50px;
-    background-color: $bg-color;
-}
-
-@each $row in odd, even {
-    .#{$row} {
-        background-image: $bg-color;
-    }
-}
-
-#book-table {
-    background-image: $bg-color;
-}
-
-.btn {
-    background-color: $primary-color;
-
-    &:hover {
-        background-color: $secondary-color;
-    }
-}
-.navbar-brand {
-    color: white;
-}
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-.dl-horizontal dt {
-    white-space: normal;
-}
-
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
-#navbar_header {
-    color: white;
-    margin-right: 10px;
-}
-
-
-
-.select2 {
-    width: 100%;
-}
-
-th,
-td {
-    white-space: nowrap;
-}
-
-div.dataTables_wrapper {
-    width: 600px;
-    margin: 0 auto;
-}
