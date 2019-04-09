@@ -1,4 +1,50 @@
-﻿@mixin setTextColorAndSize($color, $size) {
+﻿@import '_variables.scss';
+
+@mixin setTextColorAndSize($color, $size) {
     font-size: $size;
     background-color: $color;
+}
+
+@mixin navigation() {
+    margin: $nav-margin;
+    border-radius: 50px;
+    background-color: $bg-color;
+}
+
+@mixin navigation_element() {
+    display: inline-block;
+}
+
+@mixin navigation_link() {
+    color: white;
+    @include setTextColorAndSize($primary-color, 14px);
+}
+
+@mixin navigation_brand() {
+    color: white;
+}
+
+@mixin navigation_header() {
+    color: white;
+    margin-right: 10px;
+}
+
+@mixin body() {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color: #d5e0d2;
+}
+
+@mixin body_content() {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+@mixin button() {
+    background-color: $primary-color;
+}
+
+@mixin button_hover() {
+    background-color: $secondary-color;
 }

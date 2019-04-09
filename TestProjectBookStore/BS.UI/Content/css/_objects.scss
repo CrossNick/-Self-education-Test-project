@@ -1,0 +1,45 @@
+﻿@import '_mixins.scss';
+@import '_variables.scss';
+
+.navigation {
+    @include navigation();
+
+    .elements {
+        .element {
+            @include navigation_element();
+
+            .link {
+                @include navigation_link();
+            }
+        }
+    }
+
+
+
+    .header {
+
+        @include navigation_header();
+
+        .brand {
+            @include navigation_brand();
+        }
+    }
+}
+
+
+.body {
+    @include body();
+
+    .body-content {
+        @include body_content();
+    }
+}
+
+
+.button {
+    @include button();
+
+    &:hover {
+        @include button_hover();
+    }
+}

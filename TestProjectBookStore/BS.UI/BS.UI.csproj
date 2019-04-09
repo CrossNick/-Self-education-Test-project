@@ -189,6 +189,12 @@
     <Content Include="Content\css\_mixins.min.css">
       <DependentUpon>_mixins.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\_objects.css">
+      <DependentUpon>_objects.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\_objects.min.css">
+      <DependentUpon>_objects.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\_variables.css">
       <DependentUpon>_variables.scss</DependentUpon>
     </Content>
@@ -214,6 +220,8 @@
     </None>
     <Content Include="Content\css\_mixins.scss" />
     <Content Include="Content\css\_variables.scss" />
+    <Content Include="Content\css\_objects.scss" />
+    <Content Include="Content\css\_layout.scss" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\af.js" />

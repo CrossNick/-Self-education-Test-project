@@ -10,5 +10,9 @@
   {
     "outputFile": "Content/css/_variables.css",
     "inputFile": "Content/css/_variables.scss"
+  },
+  {
+    "outputFile": "Content/css/_objects.css",
+    "inputFile": "Content/css/_objects.scss"
   }
 ]

@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-1 col-md-1 col-sm-1 offset-lg-2 offset-md-2 offset-sm-2">
-            <button type="button" class="btn btn-primary" id="book-create" data-url=@Url.Action("GetAuthors", "Book")>
+            <button type="button" class="btn btn-primary button" id="book-create" data-url=@Url.Action("GetAuthors", "Book")>
                 Add Book
             </button>
         </div>
@@ -49,8 +49,8 @@
     <td data-bind="text: Rating"></td>
     <td data-bind="text: PageCount"></td>
     <td>
-        <button id="edit-book-button" class="btn btn-success kout-edit">Edit</button>
-        <button class="btn btn-danger kout-delete" id="book-delete" data-url=@Url.Action("Delete", "Book")>Delete</button>
+        <button id="edit-book-button" class="btn btn-success kout-edit button">Edit</button>
+        <button class="btn btn-danger kout-delete button" id="book-delete" data-url=@Url.Action("Delete", "Book")>Delete</button>
     </td>
 </script>
 <script type="text/html" id="edit">
@@ -62,7 +62,7 @@
     <td><input class="form-control" type="number" data-bind="value: Rating" min="0" max="10"></td>
     <td><input class="form-control" type="number" data-bind="value: PageCount"></td>
     <td>
-        <button class="btn btn-success kout-update" id="book-update" data-url=@Url.Action("Edit", "Book")>Update</button>
+        <button class="btn btn-success kout-update button" id="book-update" data-url=@Url.Action("Edit", "Book")>Update</button>
     </td>
 </script>
 <script>
