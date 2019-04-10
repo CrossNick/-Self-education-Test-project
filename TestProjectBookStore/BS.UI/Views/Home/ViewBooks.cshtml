@@ -6,14 +6,14 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-1 col-md-1 col-sm-1 offset-lg-2 offset-md-2 offset-sm-2">
-            <button type="button" class="btn btn-primary" id="book-create" data-url=@Url.Action("GetAuthors", "Book")>
+            <button type="button" class="btn btn-primary button" id="book-create" data-url=@Url.Action("GetAuthors", "Book")>
                 Add Book
             </button>
         </div>
     </div>
     <div class="row justify-content-center">
         <div class="col-lg-10 col-md-10 col-sm-10">
-            <table id="book-table" >
+            <table id="book-table" class="book-table-module">
                 <thead id="tablehead">
                     <tr>
                         <th scope="col">Title</th>

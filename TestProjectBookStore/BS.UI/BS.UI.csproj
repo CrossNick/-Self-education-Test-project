@@ -214,6 +214,10 @@
     </None>
     <Content Include="Content\css\_mixins.scss" />
     <Content Include="Content\css\_variables.scss" />
+    <Content Include="Content\css\_foundation.scss" />
+    <Content Include="Content\css\_base.scss" />
+    <Content Include="Content\css\_project.scss" />
+    <Content Include="Content\css\_cosmetic.scss" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\af.js" />

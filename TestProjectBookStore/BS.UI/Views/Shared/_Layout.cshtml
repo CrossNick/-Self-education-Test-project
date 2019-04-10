@@ -24,7 +24,7 @@
     </script>
 </head>
 <body>
-    <nav class="navbar">
+    <nav class="navbar navigation">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -35,10 +35,10 @@
             <a class="navbar-brand" href="#">Book Store</a>
         </div>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="nav navbar-nav mr-auto">
-                <li><a id="getBooksLink" data-url="@Url.Action("GetBooks", "Home")" href="@Url.Action("ViewBooks", "Home")">Book Catalog</a></li>
-                <li><a id="getAuthorsLink" data-url="@Url.Action("GetAuthors", "Home")" href="@Url.Action("ViewAuthors", "Home")">Authors</a></li>
-                <li><a id="getWebFormsLink" href="@Url.Action("WebForms", "Home")">Web Forms</a></li>
+            <ul class="nav navbar-nav mr-auto navigation-elements">
+                <li class="navigation-element"><a id="getBooksLink" class="navigation-link" data-url="@Url.Action("GetBooks", "Home")" href="@Url.Action("ViewBooks", "Home")">Book Catalog</a></li>
+                <li class="navigation-element"><a id="getAuthorsLink" class="navigation-link" data-url="@Url.Action("GetAuthors", "Home")" href="@Url.Action("ViewAuthors", "Home")">Authors</a></li>
+                <li class="navigation-element"><a id="getWebFormsLink" class="navigation-link" href="@Url.Action("WebForms", "Home")">Web Forms</a></li>
             </ul>
         </div>
     </nav>

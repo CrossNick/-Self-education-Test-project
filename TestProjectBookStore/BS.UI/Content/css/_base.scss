@@ -1,0 +1,47 @@
+﻿@import '_mixins.scss';
+@import '_variables.scss';
+
+%white-text {
+    color: white;
+}
+
+.navigation {
+    margin: $nav-margin;
+    border-radius: 50px;
+    background-color: $bg-color;
+
+    .navigation-elements {
+        .navigation-element {
+            display: inline-block;
+
+            .navigation-link {
+                @extend %white-text;
+                @include setTextColorAndSize($primary-color, 14px);
+            }
+        }
+    }
+
+    .navbar-brand {
+        color: white;
+    }
+
+    .navbar-header {
+        color: white;
+        margin-right: 10px;
+    }
+}
+
+.button {
+    background-color: $primary-color;
+
+    &:hover {
+        background-color: $secondary-color;
+    }
+}
+
+.select2 {
+    width: 100%;
+}
+
+
+
