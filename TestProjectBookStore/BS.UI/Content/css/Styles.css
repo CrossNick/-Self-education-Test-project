@@ -14,25 +14,30 @@ div.dataTables_wrapper {
   margin: 20px;
   border-radius: 50px;
   background-color: #59020b; }
-  .navigation .elements .element {
-    display: inline-block; }
-    .navigation .elements .element .link {
-      color: white;
-      font-size: 14px;
-      background-color: #8E1233; }
-  .navigation .header {
-    color: white;
-    margin-right: 10px; }
-    .navigation .header .brand {
-      color: white; }
+
+.navigation_elements_element {
+  display: inline-block; }
+
+.navigation_elements_element_link {
+  color: white;
+  font-size: 14px;
+  background-color: #8E1233; }
+
+.navigation_header {
+  color: white;
+  margin-right: 10px; }
+
+.navigation_header_brand {
+  color: white; }
 
 .body {
   padding-top: 50px;
   padding-bottom: 20px;
   background-color: #d5e0d2; }
-  .body .body-content {
-    padding-left: 15px;
-    padding-right: 15px; }
+
+.body_content {
+  padding-left: 15px;
+  padding-right: 15px; }
 
 .button {
   background-color: #8E1233; }

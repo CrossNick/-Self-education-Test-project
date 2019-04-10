@@ -4,35 +4,35 @@
 .navigation {
     @include navigation();
 
-    .elements {
-        .element {
-            @include navigation_element();
+}
 
-            .link {
-                @include navigation_link();
-            }
-        }
-    }
+.navigation_elements{
 
+}
 
+.navigation_elements_element {
+    @include navigation_element();
+}
 
-    .header {
+.navigation_elements_element_link {
+    @include navigation_link();
+}
 
-        @include navigation_header();
+.navigation_header {
+    @include navigation_header();
+}
 
-        .brand {
-            @include navigation_brand();
-        }
-    }
+.navigation_header_brand {
+    @include navigation_brand();
 }
 
 
 .body {
-    @include body();
+    @include body(); 
+}
 
-    .body-content {
-        @include body_content();
-    }
+.body_content {
+    @include body_content();
 }
 
 
