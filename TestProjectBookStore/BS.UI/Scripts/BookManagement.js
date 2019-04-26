@@ -63,7 +63,7 @@ ko.bindingHandlers.dataTablesForEach = {
         allauthors: ko.observableArray(),
     };
 
-    function OnAddButtonClick() {
+    function OnAddButtonClick() { //controller
         $('#create-book-authors').select2({
             width: 'resolve'
         });
@@ -71,10 +71,11 @@ ko.bindingHandlers.dataTablesForEach = {
         $('#create-book-modal').modal('show');
     }
 
-    function UpdateSelect2() {
+    function UpdateSelect2() {//controller
         $('#edit-book-authors').select2();
     }
-    function getAllAuthors() {
+
+    function getAllAuthors() { //service
         $.ajax({
             type: "GET",
             url: $('#book-create').data('url'),
@@ -84,7 +85,7 @@ ko.bindingHandlers.dataTablesForEach = {
         });
     } 
 
-    function getBooksAjax() {
+    function getBooksAjax() {//service
         $.ajax({
             type: "GET",
             url: $('#getBooksLink').data('url'),
@@ -94,7 +95,7 @@ ko.bindingHandlers.dataTablesForEach = {
         });
     }
 
-    self.saveData = function(currentData) {
+    self.saveData = function(currentData) { //service
        var submitData = ko.mapping.toJS(currentData);//{
         $.ajax({
             type: "POST",
@@ -113,7 +114,7 @@ ko.bindingHandlers.dataTablesForEach = {
         UpdateSelect2();
     }
 
-    self.OnCreateSubmitClick = function() {
+    self.OnCreateSubmitClick = function() { //service
         var model = {
             Title: $('#create-book-title').val(),
             ReleaseDate: $('#create-book-date').val(),
@@ -131,7 +132,7 @@ ko.bindingHandlers.dataTablesForEach = {
         });
     } 
 
-    self.OnDeleteClick = function(current)
+    self.OnDeleteClick = function(current) //service
     {
         var submitData = ko.mapping.toJS(current);
         $.ajax({
