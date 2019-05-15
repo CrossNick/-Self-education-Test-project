@@ -32,3 +32,7 @@ TestProjectBookStore/BS.UI/obj/Debug/BS.UI.pdb
 *.jfm
 TestProjectBookStore/BS.DataBase/BS.DataBase.jfm
 TestProjectBookStore/BS.DataBase/BS.DataBase.dbmdl
+TestProjectBookStore/.vs/TestProjectBookStore/DesignTimeBuild/.dtbcache
+TestProjectBookStore/.vs/TestProjectBookStore/v15/.suo
+TestProjectBookStore/BS.DataBase/BS.DataBase.dbmdl
+TestProjectBookStore/BS.DataBase/BS.DataBase.jfm
